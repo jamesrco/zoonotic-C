@@ -1,9 +1,13 @@
+# OpenOceanNCSfigs.R
+# Created November 2021 to generate figures for EDF-BEF NCS open ocean state of science report
+# Author: Jamie Collins, jcollins@edf.org
+
 library(plotrix)
 library(RColorBrewer)
 
 # read in biomass, export data
 
-rawCdat <- read.csv2("/Users/jamesrco/Dropbox/Research Materials & Journal Articles/Ocean NCS & CDR/EDF Bezos Earth Fund project/Reports/BEF State of science report figures/Open_ocean_NCS_C_data.csv", header = T, sep = ",")
+rawCdat <- read.csv2("data/Open_ocean_NCS_C_data.csv", header = T, sep = ",")
 
 # convert data types; append a field for a numerical reference # in the final figures
 
