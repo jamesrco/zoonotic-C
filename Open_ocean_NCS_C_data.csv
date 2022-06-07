@@ -1,0 +1,34 @@
+﻿Overall category,Subcategory,Biomass or export,Export type,Units,Pre-whaling/pre-industrial fishing (Pg C or Pg C yr-1),Pre-whaling/pre-industrial fishing (Pg C or Pg C yr-1) (lo bound),Pre-whaling/pre-industrial fishing (Pg C or Pg C yr-1) (hi bound),Current quantity or height of whaling/fishing minimum (Pg C or Pg C yr-1),Current lo bound (Pg C or Pg C yr-1),Current hi bound (Pg C or Pg C yr-1),Possible w/full restoration (Pg C or Pg C yr-1),Possible w/full restoration (Pg C or Pg C yr-1) (lo bound),Possible w/full restoration (Pg C or Pg C yr-1) (hi bound),Reference,C:biomass conversion applied (for fish data),Notes
+Large marine mammals,Whales,Biomass,,Pg C,0.10301846,,,0.015992451,,,,,,"Pershing et al., 2010",,8 species of baleen whales
+Large marine mammals,Whales,Export,Whale fall,Pg C yr-1,0.000192702,,,0.000028862,,,,,,"Pershing et al., 2010",,8 species of baleen whales
+Large marine mammals,Whales,Export,Whale fall,Pg C yr-1,0.00025,,,,,,,,,"Durfort et al., unpubl.",,5 species of Southern Hemisphere baleen whales
+Large marine mammals,Whales,Export,"Indirect Fe fertilization ""whale pump""",Pg C yr-1,0.0104,0.0036,0.0205,,,,,,,"Durfort et al., unpubl.",,5 species of Southern Hemisphere baleen whales
+Large marine mammals,Whales,Export,"Whale fall + indirect Fe fertilization ""whale pump""",Pg C yr-1,0.0106,0.0038,0.0208,0.002,,,0.0052,0.0022,0.0096,"Durfort et al., unpubl.",,"5 species of Southern Hemisphere baleen whales; in model, future projection was very much hampered by effects of climate change (would have been 2x the projected values without climate chanage effect)"
+Large marine mammals,Whales,Export,"Indirect Fe fertilization ""whale pump""",Pg C yr-1,,,,0.0004,,,,,,"Lavery et al., 2010",,Just Southern Ocean sperm whales
+Fish,All fish,Biomass,,Pg C,0.8625,0.4125,1.3125,0.5875,0.282,0.893,,,,"Bianchi et al., 2021",Y,
+Fish,All fish,Biomass,,Pg C,,,,0.7,,,,,,"Bar-On et al., 2018",N,
+Fish,Mesopelagic species,Biomass,,Pg C,,,,1.9,1.4,25,,,,"Irigoien et al., 2014",Y,
+Fish,Mesopelagic species,Biomass,,Pg C,,,,0.25625,,,,,,Wilson et al. 2009,Y,
+Fish,Mesopelagic species,Biomass,,Pg C,,,,0.125,,,,,,"Lam and Pauly, 2005",Y,
+Fish,Mesopelagic species,Biomass,,Pg C,,,,0.575,0.225,2,,,,"Proud et al., 2019",Y,
+Fish,Mesopelagic species,Biomass,,Pg C,,,,0.3,,,,,,"Anderson et al., 2019",Y,
+Fish,Mesopelagic species,Biomass,,Pg C,,,,0.5,,,,,,"Bar-On et al., 2018",N,
+Ocean biota,z - All ocean animals (upper limit),Biomass,,Pg C,,,,3,,,,,,"Makenzie and Lerman, 2006",N,Mass balance approach
+Ocean biota,z - All ocean animals (upper limit),Biomass,,Pg C,,,,2,,,,,,"Bar-On et al., 2018",N,Totals from different marine categories
+Ocean biota,z - All ocean animals (upper limit),Biomass,,Pg C,,,,1.5,1,2,,,,"Emerson and Hedges, 2008",N,1-2 Pg range from Table 11.1
+Fish,All fish,Export,All known processes,Pg C yr-1,,,,1.5,0.3,2.7,,,,"Saba et al., 2021",N,
+Fish,All fish,Export,Fecal pellet production,Pg C yr-1,0.475,,,0.375,,,,,,"Bianchi et al., 2021",Y,
+Fish,Mesopelagic species,Export,Diel vertical migration,Pg C yr-1,,,,2.25,0.9,3.6,,,,"Boyd et al., 2019",N,
+Fish,Mesopelagic species,Export,Diel vertical migration,Pg C yr-1,,,,1.05,0.9,1.2,,,,"Aumont et al., 2018",N,
+Fish,Epipelagic species,Export,PIC export via fecal pellets,Pg C yr-1,,,,0.028571429,0.011428571,0.062857143,,,,Wilson et al. 2009,N,"Based on extrapolation of values presented in Fig. 1, with assumption that fish PIC is exported at same rate as other sinking PIC"
+Anthropogenic activity,Fishing - trawling,Flux from sediment,,Pg C yr-1,,,,0.400909091,0.158181818,,,,,"Sala et al., 2021",,Lo bound is Sala et al. estimate for activity at +9 years after trawling commences
+Anthropogenic activity,Fishing - trawling,Flux from sediment,,Pg C yr-1,,,,0.06,,,,,,"Paradis et al., 2021",,Not really clear if value given in original paper was a timebound rate or not
+Anthropogenic activity,Fishing - total,Flux from ocean to atmosphere,,Pg C yr-1,,,,0.005563636,0.005363636,0.005763636,,,,"Mariani et al., 2020",Y,Combined emissions from fuel burned during fishing and emissions from extracted biomass (assumes 100% C_org to CO2)
+Flux,aa - Carbon cycle fluxes,Export,,Pg C yr-1,,,,,8,15,,,,"zz - Sabine and Feely, 2007; Hauck et al. 2020",,
+Bulk C storage reservoirs,Ocean DIC,,,Pg C,,,,38000,,,,,,"Emerson and Hedges, 2008",,
+Bulk C storage reservoirs,Ocean DOC,,,Pg C,,,,700,,,,,,"Emerson and Hedges, 2008",,
+Bulk C storage reservoirs,Ocean DIC,Anthro DIC,,Pg C,,,,140,,,,,,"Gruber et al., 2019",,
+Bulk C storage reservoirs,Ocean sediment C_org - top 1 m,1-5 cm,,Pg C,,,,113,,,,,,"Atwood et al., 2020",,
+Bulk C storage reservoirs,Ocean sediment C_org - top 1 m,5-30 cm,,Pg C,,,,578,,,,,,"Atwood et al., 2020",,
+Bulk C storage reservoirs,Ocean sediment C_org - top 1 m,30-100 cm,,Pg C,,,,1631,,,,,,"Atwood et al., 2020",,
+Bulk C storage reservoirs,Ocean sediment C_org - All reactive,All reactive sediments,,Pg C,,,,16000,,,,,,"Estes et al., 2019",,
