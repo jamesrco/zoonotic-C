@@ -81,9 +81,14 @@ end
 % find the bottom depth
 bottom_depth = sum(VOL.*MASK,3)./AREA(:,:,1); % depth of the ocean at each water column
 
-% export the arrays to CSV
+% export the arrays as .csv
 
-writematrix(fseq_bottom_25yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/fseq_bottom_25yr.csv')
+writematrix(fseq_bottom_25yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_25yr.csv')
+writematrix(fseq_bottom_50yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_50yr.csv')
+writematrix(fseq_bottom_100yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_100yr.csv')
+writematrix(bottom_depth,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/bottom_depth_m.csv')
+writematrix(LAT(:,1,1),'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/lat_degN.csv')
+writematrix(LON(1,:,1),'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/long_degE.csv')
 
 % % plot both the fraction remaining after 100 years and the bottom depth
 % figure(1)
