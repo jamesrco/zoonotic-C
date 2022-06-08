@@ -10,10 +10,11 @@ library(ncdf4)
 
 # load datasets
 
-# Siegel et al. "sequestration fractions," from NetCDF
+# Attempt to load Siegel et al. "sequestration fractions" from NetCDF
 
-OCIM2_fseq_48L <- nc_open("data/siegel_et_al_2021/fseq_OCIM2_48L.nc", verbose=TRUE)
-ncvar_get("data/siegel_et_al_2021/fseq_OCIM2_48L.nc")
+OCIM2_fseq_48L <- nc_open("data/siegel_et_al_2021_v2/fseq_OCIM2_48L.nc", verbose=TRUE)
+
+# currently returns an error ... can use the MATLAB script provided by Siegel et al. to get what we need a bit quicker 
 
 # Sala et al. pCO2 data, as GeoTIFF
 
