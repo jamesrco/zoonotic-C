@@ -12,9 +12,16 @@ library(ncdf4)
 
 # Attempt to load Siegel et al. "sequestration fractions" from NetCDF
 
-OCIM2_fseq_48L <- nc_open("data/siegel_et_al_2021_v2/fseq_OCIM2_48L.nc", verbose=TRUE)
+OCIM2_fseq_48L <- nc_open("data/siegel_et_al_2021_v2/fseq_OCIM2_48L.nc", verbose=TRUE) # currently returns an error
 
-# currently returns an error ... can use the MATLAB script provided by Siegel et al. to get what we need a bit quicker 
+# instead we'll use a modified version of the MATLAB script provided by Siegel et al. to get what we need: see "gen_fracs_to_constrain_trawlCO2.m" which should be in this same directory
+
+# take the necessary detour into MATLAB at this point, if the output hasn't been generated; then return to R ... ok, done.
+
+# the output from gen_fracs_to_constrain_trawlCO2.m -- 25, 50, and 100 year sequestration fractions for ocean bottom depths, plus the necessary metadata -- should now be in several .csv files found in data/derived/benthic_seqfractions
+
+# load these output files
+
 
 # Sala et al. pCO2 data, as GeoTIFF
 
