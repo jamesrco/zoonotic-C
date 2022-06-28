@@ -46,7 +46,10 @@ fseq_bottom_long_degE.raw <- read.csv("data/derived/benthic_seqfractions/long_de
 # https://www.neonscience.org/resources/learning-hub/tutorials/raster-data-r
 
 # good instructions on enabling multithreading on Mac (for data.table) here:
-# https://github.com/Rdatatable/data.table/wiki/Installation
+# https://github.com/Rdatatable/data.table/wiki/Installation and (even more helpful)
+# here: https://firas.io/post/data.table_openmp/
+# *** removing & recompiling data.table from source is critical if you already have it 
+# installed
 
 Sala_bottomtrawl_Ia.raw <- 
   raster("data/raw/sala_et_al_2021/bottom_trawling_Ia.tif")
@@ -78,21 +81,15 @@ Siegel_fseq.coords$x[Siegel_fseq.coords$x>180] <- Siegel_fseq.coords$x[Siegel_fs
 
 # now have (more or less) apples to oranges; find best match for each point in the CO2 flux dataset
 
-# convert to data tables
-Sala_CO2_efflux.coords.dt <- data.table(Sala_CO2_efflux.coords)
+# convert to data tables; add decimal where necessary
+Sala_CO2_efflux.coords.dt <- data.table(Sala_CO2_efflux.coords/10^5)
 Siegel_fseq.coords.dt <- data.table(Siegel_fseq.coords)
 
 # define function to find nearest match 
+# adapted from https://stackoverflow.com/questions/40211948/finding-closest-point-from-other-data-frame
 
 dist <- function(a, b){
   dt <- data.table((Siegel_fseq.coords.dt$x-a)^2+(Siegel_fseq.coords.dt$y-b)^2)
   return(which.min(dt$V1))}
 
 coord.matches <- Sala_CO2_efflux.coords.dt[, j = list(Closest =  dist(x, y)), by = 1:nrow(Sala_CO2_efflux.coords.dt)]
-
-dist.alt <- function(a, b){
-  dt <- data.table((Sala_CO2_efflux.coords.dt$x-a)^2+(Sala_CO2_efflux.coords.dt$y-b)^2)
-  return(which.min(dt$V1))}
-
-coord.matches.alt <- Siegel_fseq.coords.dt[, j = list(Closest =  dist.alt(x, y)), by = 1:nrow(Siegel_fseq.coords.dt)]
-
