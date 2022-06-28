@@ -45,6 +45,9 @@ fseq_bottom_long_degE.raw <- read.csv("data/derived/benthic_seqfractions/long_de
 # with some help from https://datacarpentry.org/r-raster-vector-geospatial/01-raster-structure/ and
 # https://www.neonscience.org/resources/learning-hub/tutorials/raster-data-r
 
+# good instructions on enabling multithreading on Mac (for data.table) here:
+# https://github.com/Rdatatable/data.table/wiki/Installation
+
 Sala_bottomtrawl_Ia.raw <- 
   raster("data/raw/sala_et_al_2021/bottom_trawling_Ia.tif")
 Sala_bottomtrawl_Ia.df <- as.data.frame(Sala_bottomtrawl_Ia.raw, xy = TRUE)
@@ -91,5 +94,5 @@ dist.alt <- function(a, b){
   dt <- data.table((Sala_CO2_efflux.coords.dt$x-a)^2+(Sala_CO2_efflux.coords.dt$y-b)^2)
   return(which.min(dt$V1))}
 
-coord.matches.alt <- Siegel_fseq.coords.dt[, j = list(Closest =  dist(x, y)), by = 1:nrow(Siegel_fseq.coords.dt)]
+coord.matches.alt <- Siegel_fseq.coords.dt[, j = list(Closest =  dist.alt(x, y)), by = 1:nrow(Siegel_fseq.coords.dt)]
 
