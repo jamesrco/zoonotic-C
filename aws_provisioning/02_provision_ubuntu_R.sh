@@ -3,6 +3,8 @@
 # this script sets things up with git, R, and some common R packages for spatial analysis
 # created 30 Jun 2022 by Jamie Collins, jcollins@edf.org; tested under Ubuntu 22.04
 
+cd ~/
+
 # first, update apt
 
 sudo apt update
