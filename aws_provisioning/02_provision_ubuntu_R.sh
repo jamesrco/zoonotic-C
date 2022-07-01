@@ -26,7 +26,7 @@ echo "q" | rclone config --config=".rclone.conf"
 
 # install R; from https://www.how2shout.com/linux/how-to-install-r-base-ubuntu-22-04-lts-jammy/
 
-sudo DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common dirmngr
+sudo DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends software-properties-common dirmngr
 
 wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
 
