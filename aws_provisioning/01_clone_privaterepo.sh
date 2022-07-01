@@ -29,7 +29,7 @@ sudo chmod 600 ~/.ssh/id_ed25519 # necessary since permissions weren't restricti
 
 cd ~/ # move back to home
 
-git clone git@github.com:jamesrco/zoonotic-c.git zoonotic-c # finally, we can clone the private repo
+echo "yes" | git clone git@github.com:jamesrco/zoonotic-c.git zoonotic-c # finally, we can clone the private repo
 
 # # start R (if desired)
 #
