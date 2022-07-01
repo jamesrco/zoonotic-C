@@ -30,7 +30,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common di
 
 wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
 
-sudo DEBIAN_FRONTEND=noninteractive add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+sudo DEBIAN_FRONTEND=noninteractive add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
 
 sudo DEBIAN_FRONTEND=noninteractive apt update
 
