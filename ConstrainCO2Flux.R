@@ -164,6 +164,10 @@ coord.matches.test2 <- mcsapply(1:nrow(Sala_CO2_efflux.coords.df.sub), function(
 time1 <- Sys.time()
 print(time1 - time0) # definitely faster than the approach #1 above
 
+# save output
+
+save(coord.matches.test2, file = "output/coord.matches.test2.RData")
+
 # # now with the whole enchilada
 # 
 # coord.matches <- mcsapply(1:nrow(Sala_CO2_efflux.coords.df), function(x) return(dist2(Sala_CO2_efflux.coords.df[x,])), mc.cores = 4)
