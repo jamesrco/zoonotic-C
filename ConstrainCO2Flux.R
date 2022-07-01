@@ -166,6 +166,7 @@ print(time1 - time0) # definitely faster than the approach #1 above
 
 # save output
 
+dir.create("output")
 save(coord.matches.test2, file = "output/coord.matches.test2.RData")
 
 # # now with the whole enchilada
