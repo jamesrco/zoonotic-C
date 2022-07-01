@@ -1,6 +1,7 @@
 # 02_provision_ubuntu_R.sh
 # provisioning script for an AWS EC2 instance running Ubuntu
 # this script sets things up with git, R, and some common R packages for spatial analysis
+# also sets up a method through which user can receive email notifications from the EC2 instance
 # created 30 Jun 2022 by Jamie Collins, jcollins@edf.org; tested under Ubuntu 22.04
 
 cd ~/
@@ -41,3 +42,15 @@ echo "Y" | sudo DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recom
 echo "Y" | sudo DEBIAN_FRONTEND=noninteractive apt install -y libudunits2-dev libgdal-dev libgeos-dev libproj-dev libfontconfig1-dev
 
 echo "Y" | sudo DEBIAN_FRONTEND=noninteractive apt install -y r-base-dev r-cran-sf r-cran-raster r-cran-rjava r-cran-data.table
+
+# install necessary tools for sending notification emails
+# from https://www.r-bloggers.com/2018/09/tired-of-waiting-for-your-r-scripts-to-finish-let-aws-do-the-work-get-notified-by-e-mail/
+# with modification to use an app password since Google has officially ended support
+# for the "less secure email access" option
+# *** in any case, use a throwaway email address since password has to be send via plain text
+
+sudo DEBIAN_FRONTEND=noninteractive apt install -y ssmptp
+
+# move ssmtp.conf file to the right place, assuming it's already in the git repo we cloned
+
+cp ~/zoonotic-c/aws_provisioning/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf

@@ -82,42 +82,42 @@ Siegel_fseq.coords.df$x[Siegel_fseq.coords.df$x>180] <- Siegel_fseq.coords.df$x[
 
 # now have (more or less) apples to oranges; find best match for each point in the CO2 flux dataset
 
-# ******************************************************************************
-# one approach: using just data.table
-# ******************************************************************************
-
-# *** took too long and didn't lend itself to obvious parallelization
-
-# convert to data tables; add decimal where necessary
-Sala_CO2_efflux.coords.dt <- data.table(Sala_CO2_efflux.coords/10^5)
-Siegel_fseq.coords.dt <- data.table(Siegel_fseq.coords.df)
-
-# define function to find nearest match
-# adapted from https://stackoverflow.com/questions/40211948/finding-closest-point-from-other-data-frame
-
-dist1 <- function(a, b){
-  dt <- data.table((Siegel_fseq.coords.dt$x-a)^2+(Siegel_fseq.coords.dt$y-b)^2)
-  return(which.min(dt$V1))}
-
-# find matches
-
-# test with a subset first; with benchmarking
-
-Sala_CO2_efflux.coords.dt.sub <- Sala_CO2_efflux.coords.dt[1:10000,]
-
-# find matches
-
-time0 <- Sys.time()
-
-coord.matches.test1 <- Sala_CO2_efflux.coords.dt.sub[, j = list(Closest =  dist1(x, y)), by = 1:nrow(Sala_CO2_efflux.coords.dt.sub)]
-
-time1 <- Sys.time()
-print(time1 - time0)
-
-# now with the whole enchilada
-# *** with whole dataset, ran and ran and ran on my 2015 quad-core Intel i7 MBP
-
-coord.matches <- Sala_CO2_efflux.coords.dt[, j = list(Closest =  dist1(x, y)), by = 1:nrow(Sala_CO2_efflux.coords.dt)]
+# # ******************************************************************************
+# # one approach: using just data.table
+# # ******************************************************************************
+# 
+# # *** took too long and didn't lend itself to obvious parallelization
+# 
+# # convert to data tables; add decimal where necessary
+# Sala_CO2_efflux.coords.dt <- data.table(Sala_CO2_efflux.coords/10^5)
+# Siegel_fseq.coords.dt <- data.table(Siegel_fseq.coords.df)
+# 
+# # define function to find nearest match
+# # adapted from https://stackoverflow.com/questions/40211948/finding-closest-point-from-other-data-frame
+# 
+# dist1 <- function(a, b){
+#   dt <- data.table((Siegel_fseq.coords.dt$x-a)^2+(Siegel_fseq.coords.dt$y-b)^2)
+#   return(which.min(dt$V1))}
+# 
+# # find matches
+# 
+# # test with a subset first; with benchmarking
+# 
+# Sala_CO2_efflux.coords.dt.sub <- Sala_CO2_efflux.coords.dt[1:10000,]
+# 
+# # find matches
+# 
+# time0 <- Sys.time()
+# 
+# coord.matches.test1 <- Sala_CO2_efflux.coords.dt.sub[, j = list(Closest =  dist1(x, y)), by = 1:nrow(Sala_CO2_efflux.coords.dt.sub)]
+# 
+# time1 <- Sys.time()
+# print(time1 - time0)
+# 
+# # now with the whole enchilada
+# # *** with whole dataset, ran and ran and ran on my 2015 quad-core Intel i7 MBP
+# 
+# coord.matches <- Sala_CO2_efflux.coords.dt[, j = list(Closest =  dist1(x, y)), by = 1:nrow(Sala_CO2_efflux.coords.dt)]
 
 # ******************************************************************************
 # second approach: using data.table and apply to take advantage of parallelization
@@ -158,7 +158,12 @@ coord.matches.test2 <- mcsapply(1:nrow(Sala_CO2_efflux.coords.df.sub), function(
 time1 <- Sys.time()
 print(time1 - time0) # definitely faster than the approach #1 above
 
-# now with the whole enchilada
+# # now with the whole enchilada
+# 
+# coord.matches <- mcsapply(1:nrow(Sala_CO2_efflux.coords.df), function(x) return(dist2(Sala_CO2_efflux.coords.df[x,])), mc.cores = 4)
 
-coord.matches <- mcsapply(1:nrow(Sala_CO2_efflux.coords.df), function(x) return(dist2(Sala_CO2_efflux.coords.df[x,])), mc.cores = 4)
+# send email when done ... assumes SSMTP has been installed and config file and text file for the email are in right place, etc.
+
+system(paste0("ssmtp -v jcollins2139@gmail.com < ~/zoonotic-c/aws_provisioning/ssmtp/notification_email.txt"))
+
 
