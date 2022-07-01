@@ -10,11 +10,11 @@ cd ~/
 sudo apt update
 
 # install git (just in case), AWS CLI
-sudo apt install git
-echo "Y" | sudo apt install awscli
+sudo DEBIAN_FRONTEND=noninteractive apt install -y git
+echo "Y" | sudo DEBIAN_FRONTEND=noninteractive apt install -y awscli
 
 # install unzip
-sudo apt-get install unzip
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y unzip
 
 # install, configure rclone (allows command-line access to Dropbox, Google Drive, etc.)
 curl https://rclone.org/install.sh | sudo bash 
@@ -28,11 +28,11 @@ wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sud
 
 echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
 
-echo "Y" | sudo apt install --no-install-recommends r-base
+echo "Y" | sudo DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends r-base
 
 # install necessary packages for working with some spatial data, including data.table
 # some help from https://geocompr.github.io/post/2020/installing-r-spatial-ubuntu/
 
-echo "Y" | sudo apt install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libfontconfig1-dev
+echo "Y" | sudo DEBIAN_FRONTEND=noninteractive apt install -y libudunits2-dev libgdal-dev libgeos-dev libproj-dev libfontconfig1-dev
 
-echo "Y" | sudo apt install r-base-dev r-cran-sf r-cran-raster r-cran-rjava r-cran-data.table
+echo "Y" | sudo DEBIAN_FRONTEND=noninteractive apt install -y r-base-dev r-cran-sf r-cran-raster r-cran-rjava r-cran-data.table
