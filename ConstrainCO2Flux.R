@@ -12,6 +12,7 @@ setwd("~/zoonotic-c")
 
 options("rgdal_show_exportToProj4_warnings"="none")
 library(sp) # needs to be installed first
+options("rgdal_show_exportToProj4_warnings"="none")
 library(rgdal) # needs to be installed first
 library(raster) # assumes you have some version of GDAL up and running, and 
                 # will force you to load several dependencies, including terra 
