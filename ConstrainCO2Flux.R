@@ -4,6 +4,10 @@
 # using the sequestration fractions in Siegel et al. 2021
 # Author: Jamie Collins, jcollins@edf.org
 
+# set the working directory
+
+setwd("~/zoonotic-c")
+
 # libraries
 
 library(raster) # assumes you have some version of GDAL up and running, and 
