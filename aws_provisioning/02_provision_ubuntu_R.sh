@@ -49,8 +49,8 @@ echo "Y" | sudo DEBIAN_FRONTEND=noninteractive apt install -y r-base-dev r-cran-
 # for the "less secure email access" option
 # *** in any case, use a throwaway email address since password has to be send via plain text
 
-sudo DEBIAN_FRONTEND=noninteractive apt install -y ssmptp
+sudo DEBIAN_FRONTEND=noninteractive apt install -y ssmtp
 
 # move ssmtp.conf file to the right place, assuming it's already in the git repo we cloned
 
-cp ~/zoonotic-c/aws_provisioning/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf
+sudo cp ~/zoonotic-c/aws_provisioning/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf
