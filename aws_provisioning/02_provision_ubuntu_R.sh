@@ -5,9 +5,12 @@
 
 cd ~/
 
+export DEBIAN_FRONTEND=noninteractive # in an attempt to get around the interactive prompts that ask us to restart services
+# note that we may need to specify as well each time we call something as root (sudo) since this export applies only to current user 
+
 # first, update apt
 
-sudo apt update
+sudo DEBIAN_FRONTEND=noninteractive apt update
 
 # install git (just in case), AWS CLI
 sudo DEBIAN_FRONTEND=noninteractive apt install -y git
@@ -20,13 +23,15 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y unzip
 curl https://rclone.org/install.sh | sudo bash 
 echo "q" | rclone config --config=".rclone.conf"
 
-# install R; from https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-22-04
+# install R; from https://www.how2shout.com/linux/how-to-install-r-base-ubuntu-22-04-lts-jammy/
 
-export DEBIAN_FRONTEND=noninteractive # so we can get around the interactive prompts that ask us to restart services
+sudo DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common dirmngr
 
-wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/r-project.gpg
+wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
 
-echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list
+sudo DEBIAN_FRONTEND=noninteractive add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+
+sudo DEBIAN_FRONTEND=noninteractive apt update
 
 echo "Y" | sudo DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends r-base
 
