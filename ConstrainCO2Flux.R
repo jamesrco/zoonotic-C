@@ -4,9 +4,10 @@
 # using the sequestration fractions in Siegel et al. 2021
 # Author: Jamie Collins, jcollins@edf.org
 
-# set the working directory
+# set the working directory; create directory for output
 
 setwd("~/zoonotic-c")
+dir.create("output")
 
 # libraries
 
@@ -166,12 +167,15 @@ print(time1 - time0) # definitely faster than the approach #1 above
 
 # save output
 
-dir.create("output")
 save(coord.matches.test2, file = "output/coord.matches.test2.RData")
 
 # # now with the whole enchilada
 # 
 # coord.matches <- mcsapply(1:nrow(Sala_CO2_efflux.coords.df), function(x) return(dist2(Sala_CO2_efflux.coords.df[x,])), mc.cores = 4)
+#
+# # save output
+#
+# save(coord.matches, file = "output/coord.matches.RData")
 
 # send email when done ... assumes SSMTP has been installed and config file and text file for the email are in right place, etc.
 
