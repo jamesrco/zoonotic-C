@@ -152,30 +152,35 @@ dist2 <- function(df){
   dt <- data.table((Siegel_fseq.coords.df$x-df$x)^2+(Siegel_fseq.coords.df$y-df$y)^2)
   return(which.min(dt$V1))}
 
-# test with a subset first; with benchmarking
+# # test with a subset first; with benchmarking
+# 
+# Sala_CO2_efflux.coords.df.sub <- Sala_CO2_efflux.coords.df[1:10000,]
+# 
+# # find matches; may need to adjust no. of cores
+# 
+# time0 <- Sys.time()
+# 
+# coord.matches.test2 <- mcsapply(1:nrow(Sala_CO2_efflux.coords.df.sub), function(x) return(dist2(Sala_CO2_efflux.coords.df.sub[x,])), mc.cores = 4)
+# 
+# time1 <- Sys.time()
+# print(time1 - time0) # definitely faster than the approach #1 above
+# 
+# # save output
+# 
+# save(coord.matches.test2, file = "output/coord.matches.test2.RData")
 
-Sala_CO2_efflux.coords.df.sub <- Sala_CO2_efflux.coords.df[1:10000,]
-
-# find matches; may need to adjust no. of cores
+# now with the whole enchilada
 
 time0 <- Sys.time()
 
-coord.matches.test2 <- mcsapply(1:nrow(Sala_CO2_efflux.coords.df.sub), function(x) return(dist2(Sala_CO2_efflux.coords.df.sub[x,])), mc.cores = 4)
+coord.matches <- mcsapply(1:nrow(Sala_CO2_efflux.coords.df), function(x) return(dist2(Sala_CO2_efflux.coords.df[x,])), mc.cores = 32)
 
 time1 <- Sys.time()
-print(time1 - time0) # definitely faster than the approach #1 above
+print(time1 - time0)
 
 # save output
 
-save(coord.matches.test2, file = "output/coord.matches.test2.RData")
-
-# # now with the whole enchilada
-# 
-# coord.matches <- mcsapply(1:nrow(Sala_CO2_efflux.coords.df), function(x) return(dist2(Sala_CO2_efflux.coords.df[x,])), mc.cores = 4)
-#
-# # save output
-#
-# save(coord.matches, file = "output/coord.matches.RData")
+save(coord.matches, file = "output/coord.matches.RData")
 
 # send email when done ... assumes SSMTP has been installed and config file and text file for the email are in right place, etc.
 

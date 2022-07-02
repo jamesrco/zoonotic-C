@@ -8,9 +8,8 @@
 # with help from https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-20-04
 
 # assumes you have at least as much storage on your image as dedicated to a swap
-# latest test: allocates 75 GB of 100 GB total storage (7/1/22)
 
-sudo fallocate -l 75G /swapfile
+sudo fallocate -l 35G /swapfile
 
 sudo chmod 600 /swapfile
 
