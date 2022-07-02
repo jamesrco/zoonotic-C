@@ -30,7 +30,7 @@ SSMTP_HOSTNAME=${echo \$(hostname -f)}
 
 # concatenate; write file to the right place
 
-sudo cat << EOF > /etc/ssmtp/ssmtp.conf
+cat << EOF > sudo /etc/ssmtp/ssmtp.conf
 root=$SSMTP_ROOT
 mailhub=$SSMTP_SERVER:$SSMTP_PORT
 AuthUser=$SSMTP_USER
