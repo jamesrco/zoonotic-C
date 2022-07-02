@@ -30,7 +30,7 @@ SSMTP_HOSTNAME=${echo \$(hostname -f)}
 
 # concatenate; write file to the right place
 
-cat << EOF > sudo /etc/ssmtp/ssmtp.conf
+cat << EOF >  ~/zoonotic-c/aws_provisioning/ssmtp/ssmtp.conf
 root=$SSMTP_ROOT
 mailhub=$SSMTP_SERVER:$SSMTP_PORT
 AuthUser=$SSMTP_USER
@@ -41,4 +41,4 @@ hostname=$SSMTP_HOSTNAME
 FromLineOverride=YES
 EOF
 
-# sudo cp ~/zoonotic-c/aws_provisioning/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf
+sudo cp ~/zoonotic-c/aws_provisioning/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf
