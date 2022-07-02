@@ -26,7 +26,7 @@ SSMTP_USER=${SSMTP_USER:-jamesrco.aws@gmail.com}
 SSMTP_PASS=${SSMTP_PASS:-***REMOVED***}
 SSMTP_SERVER=${SSMTP_SERVER:-smtp.gmail.com}
 SSMTP_PORT=${SSMTP_PORT:-587}
-SSMTP_HOSTNAME=echo $(hostname -f)
+SSMTP_HOSTNAME='echo $(hostname -f)'
 
 # concatenate; write file to the right place
 
