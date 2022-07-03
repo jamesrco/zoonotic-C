@@ -89,25 +89,27 @@ Siegel_fseq.coords.df$x[Siegel_fseq.coords.df$x>180] <- Siegel_fseq.coords.df$x[
 
 # now have (more or less) apples to oranges; find best match for each point in the CO2 flux dataset
 
-# # ******************************************************************************
-# # one approach: using just data.table
-# # ******************************************************************************
-# 
-# # *** took too long and didn't lend itself to obvious parallelization
-# 
-# # convert to data tables; add decimal where necessary
-# Sala_CO2_efflux.coords.dt <- data.table(Sala_CO2_efflux.coords/10^5)
-# Siegel_fseq.coords.dt <- data.table(Siegel_fseq.coords.df)
-# 
-# # define function to find nearest match
-# # adapted from https://stackoverflow.com/questions/40211948/finding-closest-point-from-other-data-frame
-# 
-# dist1 <- function(a, b){
-#   dt <- data.table((Siegel_fseq.coords.dt$x-a)^2+(Siegel_fseq.coords.dt$y-b)^2)
-#   return(which.min(dt$V1))}
-# 
-# # find matches
-# 
+# ******************************************************************************
+# one approach: using just data.table
+# ******************************************************************************
+
+# *** seemed to take too long on my laptop and didn't lend itself to obvious parallelization
+# but, given the error with approach #2, below, trying this with a 32 vCPU EC2
+# instance on AWS (64 GB RAM plus a 35 GB disk swap)
+
+# convert to data tables; add decimal where necessary
+Sala_CO2_efflux.coords.dt <- data.table(Sala_CO2_efflux.coords/10^5)
+Siegel_fseq.coords.dt <- data.table(Siegel_fseq.coords.df)
+
+# define function to find nearest match
+# adapted from https://stackoverflow.com/questions/40211948/finding-closest-point-from-other-data-frame
+
+dist1 <- function(a, b){
+  dt <- data.table((Siegel_fseq.coords.dt$x-a)^2+(Siegel_fseq.coords.dt$y-b)^2)
+  return(which.min(dt$V1))}
+
+# find matches
+
 # # test with a subset first; with benchmarking
 # 
 # Sala_CO2_efflux.coords.dt.sub <- Sala_CO2_efflux.coords.dt[1:10000,]
@@ -120,38 +122,56 @@ Siegel_fseq.coords.df$x[Siegel_fseq.coords.df$x>180] <- Siegel_fseq.coords.df$x[
 # 
 # time1 <- Sys.time()
 # print(time1 - time0)
+
+# now with the whole enchilada
+# *** with whole dataset, just ran and ran and ran, at least on my 2015 quad-core Intel i7 MBP
+
+time0 <- Sys.time()
+
+coord.matches <- Sala_CO2_efflux.coords.dt[, j = list(Closest =  dist1(x, y)), by = 1:nrow(Sala_CO2_efflux.coords.dt)]
+
+time1 <- Sys.time()
+print(time1 - time0)
+
+# # ******************************************************************************
+# # second approach: using data.table and apply to take advantage of parallelization
+# # ******************************************************************************
 # 
-# # now with the whole enchilada
-# # *** with whole dataset, ran and ran and ran on my 2015 quad-core Intel i7 MBP
+# # *** unfortunately, this approach didn't seem to work so well when I sent it to
+# # a 32-vCPU AWS EC2 machine with 64 GB of RAM (and a 35 GB disk swap):
+# # ran for about half a day (benchmark time difference of 13.84486 hours),
+# # which seemed right, but then returned this error:
+# #
+# # Warning message:                                                        
+# # In parallel::mclapply(X = X, FUN = FUN, ...) :
+# #  scheduled cores 1, 3, 5, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 29, 30, 31, 32 did not deliver results, all 
+# #  values of the jobs will be affected
+# #
+# # the output object did save, with the correct number of rows, but I don't think
+# # it worked correctly ... will try approach #1, above, on a similar EC2 instance
 # 
-# coord.matches <- Sala_CO2_efflux.coords.dt[, j = list(Closest =  dist1(x, y)), by = 1:nrow(Sala_CO2_efflux.coords.dt)]
-
-# ******************************************************************************
-# second approach: using data.table and apply to take advantage of parallelization
-# ******************************************************************************
-
-# convert Sala data to a data.frame, move decimal
-Sala_CO2_efflux.coords.df <- as.data.frame(Sala_CO2_efflux.coords/10^5)
-
-# create a parallel version of sapply
-
-mcsapply <- function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) {
-  FUN <- match.fun(FUN)
-  answer <- parallel::mclapply(X = X, FUN = FUN, ...)
-  if (USE.NAMES && is.character(X) && is.null(names(answer))) 
-    names(answer) <- X
-  if (!isFALSE(simplify) && length(answer)) 
-    simplify2array(answer, higher = (simplify == "array"))
-  else answer
-}
-
-# define function to find nearest match 
-# adapted from https://stackoverflow.com/questions/40211948/finding-closest-point-from-other-data-frame
-
-dist2 <- function(df){
-  dt <- data.table((Siegel_fseq.coords.df$x-df$x)^2+(Siegel_fseq.coords.df$y-df$y)^2)
-  return(which.min(dt$V1))}
-
+# # convert Sala data to a data.frame, move decimal
+# Sala_CO2_efflux.coords.df <- as.data.frame(Sala_CO2_efflux.coords/10^5)
+# 
+# # create a parallel version of sapply
+# 
+# mcsapply <- function (X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE) {
+#   FUN <- match.fun(FUN)
+#   answer <- parallel::mclapply(X = X, FUN = FUN, ...)
+#   if (USE.NAMES && is.character(X) && is.null(names(answer))) 
+#     names(answer) <- X
+#   if (!isFALSE(simplify) && length(answer)) 
+#     simplify2array(answer, higher = (simplify == "array"))
+#   else answer
+# }
+# 
+# # define function to find nearest match 
+# # adapted from https://stackoverflow.com/questions/40211948/finding-closest-point-from-other-data-frame
+# 
+# dist2 <- function(df){
+#   dt <- data.table((Siegel_fseq.coords.df$x-df$x)^2+(Siegel_fseq.coords.df$y-df$y)^2)
+#   return(which.min(dt$V1))}
+# 
 # # test with a subset first; with benchmarking
 # 
 # Sala_CO2_efflux.coords.df.sub <- Sala_CO2_efflux.coords.df[1:10000,]
@@ -163,20 +183,22 @@ dist2 <- function(df){
 # coord.matches.test2 <- mcsapply(1:nrow(Sala_CO2_efflux.coords.df.sub), function(x) return(dist2(Sala_CO2_efflux.coords.df.sub[x,])), mc.cores = 4)
 # 
 # time1 <- Sys.time()
-# print(time1 - time0) # definitely faster than the approach #1 above
+# print(time1 - time0)
+# 
+# # *** definitely faster than the approach #1 above, at least on my 2015 quad-core Intel i7 MBP
 # 
 # # save output
 # 
 # save(coord.matches.test2, file = "output/coord.matches.test2.RData")
-
-# now with the whole enchilada
-
-time0 <- Sys.time()
-
-coord.matches <- mcsapply(1:nrow(Sala_CO2_efflux.coords.df), function(x) return(dist2(Sala_CO2_efflux.coords.df[x,])), mc.cores = 32)
-
-time1 <- Sys.time()
-print(time1 - time0)
+# 
+# # now with the whole enchilada
+# 
+# time0 <- Sys.time()
+# 
+# coord.matches <- mcsapply(1:nrow(Sala_CO2_efflux.coords.df), function(x) return(dist2(Sala_CO2_efflux.coords.df[x,])), mc.cores = 32)
+# 
+# time1 <- Sys.time()
+# print(time1 - time0)
 
 # save output
 
