@@ -3,6 +3,9 @@
 # this script sets things up with git, R, and some common R packages for spatial analysis
 # created 30 Jun 2022 by Jamie Collins, jcollins@edf.org; tested under Ubuntu 22.04
 
+# *** note: requires at least 16 GB storage just for the install; more if actually trying
+# to store anything
+
 cd ~/
 
 export DEBIAN_FRONTEND=noninteractive # in an attempt to get around the interactive prompts that ask us to restart services
