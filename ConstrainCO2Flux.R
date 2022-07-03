@@ -99,7 +99,8 @@ Siegel_fseq.coords.df$x[Siegel_fseq.coords.df$x>180] <- Siegel_fseq.coords.df$x[
 
 # first, set number of threads (need to change depending on cores or vCPUS)
 
-setDTthreads(8)
+setDTthreads(32) # shouldn't allow you to exceed actual # of cores or vCPUS,
+                # at least on linux
 
 # convert to data tables; add decimal where necessary
 Sala_CO2_efflux.coords.dt <- data.table(Sala_CO2_efflux.coords/10^5)
