@@ -22,3 +22,9 @@ sudo swapon /swapfile
 sudo swapon --show
 
 free -h
+
+# # to remove it
+# 
+# sudo swapoff -v /swapfile
+# 
+# sudo rm /swapfile
