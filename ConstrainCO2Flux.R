@@ -97,6 +97,10 @@ Siegel_fseq.coords.df$x[Siegel_fseq.coords.df$x>180] <- Siegel_fseq.coords.df$x[
 # but, given the error with approach #2, below, trying this with a 32 vCPU EC2
 # instance on AWS (64 GB RAM plus a 35 GB disk swap)
 
+# first, set number of threads (need to change depending on cores or vCPUS)
+
+setDTthreads(8)
+
 # convert to data tables; add decimal where necessary
 Sala_CO2_efflux.coords.dt <- data.table(Sala_CO2_efflux.coords/10^5)
 Siegel_fseq.coords.dt <- data.table(Siegel_fseq.coords.df)
