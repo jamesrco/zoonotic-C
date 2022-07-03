@@ -143,7 +143,7 @@ print(time1 - time0)
 # # ******************************************************************************
 # 
 # # *** unfortunately, this approach didn't seem to work so well when I sent it to
-# # a 32-vCPU AWS EC2 machine with 64 GB of RAM (and a 35 GB disk swap):
+# # a c5a.8xlarge 32-vCPU AWS EC2 machine with 64 GB of RAM (and a 35 GB disk swap):
 # # ran for about half a day (benchmark time difference of 13.84486 hours),
 # # which seemed right, but then returned this error:
 # #
