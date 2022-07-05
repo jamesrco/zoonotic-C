@@ -97,6 +97,10 @@ Siegel_fseq.coords.df$x[Siegel_fseq.coords.df$x>180] <- Siegel_fseq.coords.df$x[
 # but, given the error with approach #2, below, trying this with a 32 vCPU EC2
 # instance on AWS (64 GB RAM plus a 35 GB disk swap)
 
+# *** results from run on a c5a.8xlarge 32-vCPU AWS EC2 machine with 64 GB of
+# RAM (and a 35 GB disk swap): Time difference of 2.307836 days; generated 
+# a 1.6 GB data object
+
 # first, set number of threads (need to change depending on cores or vCPUS)
 
 setDTthreads(32) # shouldn't allow you to exceed actual # of cores or vCPUS,
