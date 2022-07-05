@@ -15,7 +15,8 @@
 
 # set the working directory; create directory for output
 
-setwd("~/Code/zoonotic-C/") # for my laptop
+# setwd("~/Code/zoonotic-C/") # for my laptop
+setwd("~/zoonotic-C/") # for AWS
 
 # libraries
 
@@ -32,15 +33,67 @@ library(parallel) # part of base; doesn't need to be installed
 # using the appropriate (nearest match) benthic sequestration fractions in the
 # Siegel et al dataset
 
-# load in the file containing the coordinate matches, generated in previous
-# script 02_ConstrainCO2Flux_coordMatch.R and saved to 
+# if not already loaded, load in the file containing the coordinate matches,
+# generated in previous script 02_ConstrainCO2Flux_coordMatch.R and saved to 
 # zoonotic-c/data/derived/output/
 
 load("data/derived/output/coord.matches.RData")
 
-# define functions to appropriately adjust the Sala et al data
+# define some efflux fractions for each of the timescales (should be 1 - the
+# sequestration fraction) and some functions to perform the calculations
 
-constrainFlux.25yr <- function(rawFlux, closestMatch){
-  adjFlux <- rawFlux*(1-fseq_bottom_25yr.raw[closestMatch])
-  return adjFlux
+effluxFrac.25yr <- 1-as.numeric(unlist(fseq_bottom_25yr.raw))
+effluxFrac.50yr <- 1-as.numeric(unlist(fseq_bottom_50yr.raw))
+effluxFrac.100yr <- 1-as.numeric(unlist(fseq_bottom_100yr.raw))
+
+constrainFlux.25yr <- function(a){
+  adjFlux <- Sala_CO2_efflux.df$co2_efflux[a]*effluxFrac.25yr[coord.matches$Closest[a]]
+  return(adjFlux)
 }
+
+constrainFlux.50yr <- function(a){
+  adjFlux <- Sala_CO2_efflux.df$co2_efflux[a]*effluxFrac.25yr[coord.matches$Closest[a]]
+  return(adjFlux)
+}
+
+constrainFlux.100yr <- function(a){
+  adjFlux <- Sala_CO2_efflux.df$co2_efflux[a]*effluxFrac.25yr[coord.matches$Closest[a]]
+  return(adjFlux)
+}
+
+# run the calculations; set up for parallel processing (with some benchmarking)
+
+time0 <- Sys.time()
+adjCO2efflux.25yr <- unlist(mclapply(1:length(Sala_CO2_efflux.df$co2_efflux), constrainFlux.25yr, mc.cores = 32))
+time1 <- Sys.time()
+print(time1 - time0)
+
+# save output
+save(adjCO2efflux.25yr, file = "data/derived/output/adjCO2efflux.25yr.RData")
+
+time0 <- Sys.time()
+adjCO2efflux.50yr <- unlist(mclapply(1:length(Sala_CO2_efflux.df$co2_efflux), constrainFlux.50yr, mc.cores = 32))
+time1 <- Sys.time()
+print(time1 - time0)
+
+# save output
+save(adjCO2efflux.50yr, file = "data/derived/output/adjCO2efflux.50yr.RData")
+
+time0 <- Sys.time()
+adjCO2efflux.100yr <- unlist(mclapply(1:length(Sala_CO2_efflux.df$co2_efflux), constrainFlux.100yr, mc.cores = 32))
+time1 <- Sys.time()
+print(time1 - time0)
+
+# save output
+save(adjCO2efflux.100yr, file = "data/derived/output/adjCO2efflux.100yr.RData")
+
+# get some basic statistics; with unadjusted data for comparison
+
+sum(adjCO2efflux.25yr, na.rm=T)
+sum(adjCO2efflux.50yr, na.rm=T)
+sum(adjCO2efflux.100yr, na.rm=T)
+sum(Sala_CO2_efflux.df$co2_efflux, na.rm=T)
+
+# send email when done ... assumes SSMTP has been installed and config file and text file for the email are in right place, etc.
+
+system(paste0("ssmtp -v jcollins2139@gmail.com < ~/zoonotic-c/aws_provisioning/ssmtp/notification_email.txt"))
