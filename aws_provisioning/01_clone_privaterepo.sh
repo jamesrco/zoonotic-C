@@ -8,6 +8,7 @@ sudo apt update
 
 # install git (just in case), AWS CLI
 sudo DEBIAN_FRONTEND=noninteractive apt install -y git
+sudo DEBIAN_FRONTEND=noninteractive apt install -y git-lfs
 echo "Y" | sudo DEBIAN_FRONTEND=noninteractive apt install -y awscli
 
 # clone the git repo
