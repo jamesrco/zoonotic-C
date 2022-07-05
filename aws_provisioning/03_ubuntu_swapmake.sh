@@ -9,7 +9,7 @@
 
 # assumes you have at least as much storage on your image as dedicated to a swap
 
-sudo fallocate -l 35G /swapfile
+sudo fallocate -l 200G /swapfile
 
 sudo chmod 600 /swapfile
 
@@ -27,4 +27,4 @@ free -h
 # 
 # sudo swapoff -v /swapfile
 # 
-# sudo rm /swapfile
+# 

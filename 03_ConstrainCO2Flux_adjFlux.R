@@ -64,7 +64,7 @@ constrainFlux.100yr <- function(a){
 # run the calculations; set up for parallel processing (with some benchmarking)
 
 time0 <- Sys.time()
-adjCO2efflux.25yr <- unlist(mclapply(1:length(Sala_CO2_efflux.df$co2_efflux), constrainFlux.25yr, mc.cores = 32))
+adjCO2efflux.25yr <- unlist(mclapply(1:length(Sala_CO2_efflux.df$co2_efflux), constrainFlux.25yr, mc.cores = 64))
 time1 <- Sys.time()
 print(time1 - time0)
 
@@ -72,7 +72,7 @@ print(time1 - time0)
 save(adjCO2efflux.25yr, file = "data/derived/output/adjCO2efflux.25yr.RData")
 
 time0 <- Sys.time()
-adjCO2efflux.50yr <- unlist(mclapply(1:length(Sala_CO2_efflux.df$co2_efflux), constrainFlux.50yr, mc.cores = 32))
+adjCO2efflux.50yr <- unlist(mclapply(1:length(Sala_CO2_efflux.df$co2_efflux), constrainFlux.50yr, mc.cores = 64))
 time1 <- Sys.time()
 print(time1 - time0)
 
@@ -80,7 +80,7 @@ print(time1 - time0)
 save(adjCO2efflux.50yr, file = "data/derived/output/adjCO2efflux.50yr.RData")
 
 time0 <- Sys.time()
-adjCO2efflux.100yr <- unlist(mclapply(1:length(Sala_CO2_efflux.df$co2_efflux), constrainFlux.100yr, mc.cores = 32))
+adjCO2efflux.100yr <- unlist(mclapply(1:length(Sala_CO2_efflux.df$co2_efflux), constrainFlux.100yr, mc.cores = 64))
 time1 <- Sys.time()
 print(time1 - time0)
 
