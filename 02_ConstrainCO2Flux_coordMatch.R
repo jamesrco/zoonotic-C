@@ -1,13 +1,18 @@
-# ConstrainCO2Flux.R
+# 02_ConstrainCO2Flux_coordMatch.R
 # Created June 7, 2022
-# Purpose: Attempt to constrain the crude estimate of benthic CO2 flux in Sala  et al. 2021
-# using the sequestration fractions in Siegel et al. 2021
+# Purpose: Second in series of scripts used to constrain the crude estimate of
+# benthic CO2 flux in Sala  et al. 2021 using the sequestration fractions in
+# Siegel et al. 2021
 # Author: Jamie Collins, jcollins@edf.org
+
+# This second script is set up to farm some intensive calculations out to AWS
+# *** Assumes user has run the four shell provisioning scripts in
+# zoonotic-C/aws-provisioning to get the remote computer provisioned properly
 
 # set the working directory; create directory for output
 
-setwd("~/zoonotic-c")
-dir.create("output")
+setwd("~/zoonotic-c") # for AWS
+dir.create("data/derived/output")
 
 # libraries
 
@@ -16,7 +21,7 @@ library(sp) # needs to be installed first
 options("rgdal_show_exportToProj4_warnings"="none")
 library(rgdal) # needs to be installed first
 library(raster) # assumes you have some version of GDAL up and running, and 
-                # will force you to load several dependencies, including terra 
+# will force you to load several dependencies, including terra 
 library(data.table) # needs to be installed first
 library(parallel) # part of base; doesn't need to be installed
 
@@ -30,24 +35,24 @@ library(parallel) # part of base; doesn't need to be installed
 
 # instead we'll use a modified version of the MATLAB script provided by Siegel et al. to get what we need: see "gen_fracs_to_constrain_trawlCO2.m" which should be in this same directory
 
-# take the necessary detour into MATLAB at this point, if the output hasn't been generated; then return to R
+# *** take the necessary detour into MATLAB at this point, if the output hasn't been generated; then return to R
 
 # the output from gen_fracs_to_constrain_trawlCO2.m -- 25, 50, and 100 year sequestration fractions for ocean bottom depths, plus the necessary metadata -- should now be in several .csv files found in data/derived/benthic_seqfractions
 
 # load these output files
 
 fseq_bottom_25yr.raw <- read.csv("data/derived/benthic_seqfractions/fseq_bottom_25yr.csv",
-                            header = FALSE)
+                                 header = FALSE)
 fseq_bottom_50yr.raw <- read.csv("data/derived/benthic_seqfractions/fseq_bottom_50yr.csv",
                                  header = FALSE)
 fseq_bottom_100yr.raw <- read.csv("data/derived/benthic_seqfractions/fseq_bottom_100yr.csv",
-                                 header = FALSE)
+                                  header = FALSE)
 fseq_bottom_depth_m.raw <- read.csv("data/derived/benthic_seqfractions/bottom_depth_m.csv",
-                                 header = FALSE)
+                                    header = FALSE)
 fseq_bottom_lat_degN.raw <- read.csv("data/derived/benthic_seqfractions/lat_degN.csv",
-                                 header = FALSE)
+                                     header = FALSE)
 fseq_bottom_long_degE.raw <- read.csv("data/derived/benthic_seqfractions/long_degE.csv",
-                                 header = FALSE)
+                                      header = FALSE)
 
 # load Sala et al. pCO2 data, as GeoTIFF, then convert to data frames
 # with some help from https://datacarpentry.org/r-raster-vector-geospatial/01-raster-structure/ and
@@ -69,7 +74,7 @@ Sala_carbon_ranking.df <- as.data.frame(Sala_carbon_ranking.raw, xy = TRUE)
 
 Sala_CO2_efflux.raw <- 
   raster("data/raw/sala_et_al_2021/co2_efflux.tif")
-# Sala_CO2_efflux.df <- as.data.frame(Sala_CO2_efflux.raw, xy = TRUE) 
+Sala_CO2_efflux.df <- as.data.frame(Sala_CO2_efflux.raw, xy = FALSE) 
 # # note that creating a data frame from this last object will require a lot of memory ... I had to up 
 # # the R_MAX_VSIZE variable in .Renviron according to the directions here:
 # # https://stackoverflow.com/questions/51248293/error-vector-memory-exhausted-limit-reached-r-3-5-0-macos
@@ -79,12 +84,12 @@ Sala_CO2_efflux.raw <-
 # create data frames of the coordinates of the points in the two different datasets
 
 # CO2 flux data
-Sala_CO2_efflux.coords <- xyFromCell(Sala_CO2_efflux.raw,c(1:length(Sala_CO2_efflux.raw))) # easy, can just use the xyFromCell function in raster package
+Sala_CO2_efflux.coords <- xyFromCell(Sala_CO2_efflux.raw,c(1:length(Sala_CO2_efflux.raw))) # easy, can just use the xyFromCell function in raster package 
 
 # sequestration fractions
 Siegel_fseq.coords.df <- data.frame(as.numeric(rep(fseq_bottom_long_degE.raw[1,],91)),rep(fseq_bottom_lat_degN.raw[,1],180))
 colnames(Siegel_fseq.coords.df) <- c("x","y")
-# convert to eastvings & westings rather than just eastings, for compatibility 
+# convert to eastings & westings rather than just eastings, for compatibility 
 Siegel_fseq.coords.df$x[Siegel_fseq.coords.df$x>180] <- Siegel_fseq.coords.df$x[Siegel_fseq.coords.df$x>180]-360
 
 # now have (more or less) apples to oranges; find best match for each point in the CO2 flux dataset
@@ -104,7 +109,7 @@ Siegel_fseq.coords.df$x[Siegel_fseq.coords.df$x>180] <- Siegel_fseq.coords.df$x[
 # first, set number of threads (need to change depending on cores or vCPUS)
 
 setDTthreads(32) # shouldn't allow you to exceed actual # of cores or vCPUS,
-                # at least on linux
+# at least on linux
 
 # convert to data tables; add decimal where necessary
 Sala_CO2_efflux.coords.dt <- data.table(Sala_CO2_efflux.coords/10^5)
@@ -211,10 +216,8 @@ print(time1 - time0)
 
 # save output
 
-save(coord.matches, file = "output/coord.matches.RData")
+save(coord.matches, file = "data/derived/output/coord.matches.RData")
 
 # send email when done ... assumes SSMTP has been installed and config file and text file for the email are in right place, etc.
 
 system(paste0("ssmtp -v jcollins2139@gmail.com < ~/zoonotic-c/aws_provisioning/ssmtp/notification_email.txt"))
-
-
