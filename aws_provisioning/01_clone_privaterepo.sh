@@ -6,7 +6,7 @@
 
 sudo apt update
 
-# install git (just in case), AWS CLI
+# install git (just in case), git-lfs, AWS CLI
 sudo DEBIAN_FRONTEND=noninteractive apt install -y git
 sudo DEBIAN_FRONTEND=noninteractive apt install -y git-lfs
 echo "Y" | sudo DEBIAN_FRONTEND=noninteractive apt install -y awscli
@@ -33,6 +33,10 @@ cd ~/ # move back to home
 ssh -o "StrictHostKeyChecking no" github.com
 
 echo "yes" | git clone git@github.com:jamesrco/zoonotic-c.git zoonotic-c # finally, we can clone the private repo
+
+cd ~/zoonotic-c
+git lfs pull # just in case
+cd ~/ # move back to home
 
 # # start R (if desired)
 #
