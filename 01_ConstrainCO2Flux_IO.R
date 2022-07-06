@@ -46,6 +46,8 @@ fseq_bottom_50yr.raw <- read.csv("data/derived/benthic_seqfractions/fseq_bottom_
                                  header = FALSE)
 fseq_bottom_100yr.raw <- read.csv("data/derived/benthic_seqfractions/fseq_bottom_100yr.csv",
                                  header = FALSE)
+fseq_bottom_1000yr.raw <- read.csv("data/derived/benthic_seqfractions/fseq_bottom_1000yr.csv",
+                                  header = FALSE)
 fseq_bottom_depth_m.raw <- read.csv("data/derived/benthic_seqfractions/bottom_depth_m.csv",
                                  header = FALSE)
 fseq_bottom_lat_degN.raw <- read.csv("data/derived/benthic_seqfractions/lat_degN.csv",
