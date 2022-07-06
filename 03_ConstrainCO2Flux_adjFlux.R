@@ -15,8 +15,8 @@
 
 # set the working directory; create directory for output
 
-# setwd("~/Code/zoonotic-C/") # for my laptop
-setwd("~/zoonotic-C/") # for AWS
+setwd("~/Code/zoonotic-C/") # for my laptop
+# setwd("~/zoonotic-C/") # for AWS
 
 # libraries
 
@@ -46,46 +46,76 @@ effluxFrac.25yr <- 1-as.numeric(unlist(fseq_bottom_25yr.raw))
 effluxFrac.50yr <- 1-as.numeric(unlist(fseq_bottom_50yr.raw))
 effluxFrac.100yr <- 1-as.numeric(unlist(fseq_bottom_100yr.raw))
 
+# since the underlying Sala et al. dataset is very sparse, can create a subset
+# and run our functions on just that subset
+
+ind.nonZeroCO2 <- which(!is.na(Sala_CO2_efflux.df$co2_efflux))
+length(ind.nonZeroCO2)/length(Sala_CO2_efflux.df$co2_efflux) # values that aren't NA represent < 1% of the total dataset
+
 constrainFlux.25yr <- function(a){
   adjFlux <- Sala_CO2_efflux.df$co2_efflux[a]*effluxFrac.25yr[coord.matches$Closest[a]]
-  return(adjFlux)
+  # # some code for a progress indicator, if desired
+  # thisRecNum <- which(ind.nonZeroCO2 == a)
+  # if (thisRecNum %% 1000==0) {
+  #   progress <- (thisRecNum/length(ind.nonZeroCO2))*100
+  #   print(paste0("Progress: ",progress," %"))
+  # }
+    return(adjFlux)
 }
 
 constrainFlux.50yr <- function(a){
-  adjFlux <- Sala_CO2_efflux.df$co2_efflux[a]*effluxFrac.25yr[coord.matches$Closest[a]]
+  adjFlux <- Sala_CO2_efflux.df$co2_efflux[a]*effluxFrac.50yr[coord.matches$Closest[a]]
   return(adjFlux)
 }
 
 constrainFlux.100yr <- function(a){
-  adjFlux <- Sala_CO2_efflux.df$co2_efflux[a]*effluxFrac.25yr[coord.matches$Closest[a]]
+  adjFlux <- Sala_CO2_efflux.df$co2_efflux[a]*effluxFrac.100yr[coord.matches$Closest[a]]
   return(adjFlux)
 }
 
-# run the calculations; set up for parallel processing (with some benchmarking)
+# run the calculations
 
+# *** these still blew up memory running with the entire dataset; even worse
+# when using mclapply ... but much better with a reduced dataset
+
+# 25 year scenario
 time0 <- Sys.time()
-adjCO2efflux.25yr <- unlist(mclapply(1:length(Sala_CO2_efflux.df$co2_efflux), constrainFlux.25yr, mc.cores = 64))
+adjCO2efflux.25yr_nonZero <- unlist(lapply(ind.nonZeroCO2, constrainFlux.25yr))
 time1 <- Sys.time()
 print(time1 - time0)
 
-# save output
+# clean up, reformat, save output; clear memory
+adjCO2efflux.25yr <- as.data.frame(matrix(data = NA, nrow = length(Sala_CO2_efflux.df$co2_efflux), ncol = 1))
+colnames(adjCO2efflux.25yr) <- c("adjCO2_efflux.25yr")
+adjCO2efflux.25yr$adjCO2_efflux.25yr[ind.nonZeroCO2] <- adjCO2efflux.25yr_nonZero
 save(adjCO2efflux.25yr, file = "data/derived/output/adjCO2efflux.25yr.RData")
+gc()
 
+# 50 year scenario
 time0 <- Sys.time()
-adjCO2efflux.50yr <- unlist(mclapply(1:length(Sala_CO2_efflux.df$co2_efflux), constrainFlux.50yr, mc.cores = 64))
+adjCO2efflux.50yr_nonZero <- unlist(lapply(ind.nonZeroCO2, constrainFlux.50yr))
 time1 <- Sys.time()
 print(time1 - time0)
 
-# save output
+# clean up, reformat, save output; clear memory
+adjCO2efflux.50yr <- as.data.frame(matrix(data = NA, nrow = length(Sala_CO2_efflux.df$co2_efflux), ncol = 1))
+colnames(adjCO2efflux.50yr) <- c("adjCO2_efflux.50yr")
+adjCO2efflux.50yr$adjCO2_efflux.50yr[ind.nonZeroCO2] <- adjCO2efflux.50yr_nonZero
 save(adjCO2efflux.50yr, file = "data/derived/output/adjCO2efflux.50yr.RData")
+gc()
 
+# 100 year scenario
 time0 <- Sys.time()
-adjCO2efflux.100yr <- unlist(mclapply(1:length(Sala_CO2_efflux.df$co2_efflux), constrainFlux.100yr, mc.cores = 64))
+adjCO2efflux.100yr_nonZero <- unlist(lapply(ind.nonZeroCO2, constrainFlux.100yr))
 time1 <- Sys.time()
 print(time1 - time0)
 
-# save output
+# clean up, reformat, save output; clear memory
+adjCO2efflux.100yr <- as.data.frame(matrix(data = NA, nrow = length(Sala_CO2_efflux.df$co2_efflux), ncol = 1))
+colnames(adjCO2efflux.100yr) <- c("adjCO2_efflux.100yr")
+adjCO2efflux.100yr$adjCO2_efflux.100yr[ind.nonZeroCO2] <- adjCO2efflux.100yr_nonZero
 save(adjCO2efflux.100yr, file = "data/derived/output/adjCO2efflux.100yr.RData")
+gc()
 
 # get some basic statistics; with unadjusted data for comparison
 
@@ -94,6 +124,6 @@ sum(adjCO2efflux.50yr, na.rm=T)
 sum(adjCO2efflux.100yr, na.rm=T)
 sum(Sala_CO2_efflux.df$co2_efflux, na.rm=T)
 
-# send email when done ... assumes SSMTP has been installed and config file and text file for the email are in right place, etc.
-
-system(paste0("ssmtp -v jcollins2139@gmail.com < ~/zoonotic-c/aws_provisioning/ssmtp/notification_email.txt"))
+# # send email when done ... assumes SSMTP has been installed and config file and text file for the email are in right place, etc.
+# 
+# system(paste0("ssmtp -v jcollins2139@gmail.com < ~/zoonotic-c/aws_provisioning/ssmtp/notification_email.txt"))
