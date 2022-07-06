@@ -129,7 +129,24 @@ sum(Sala_CO2_efflux.df$co2_efflux, na.rm=T) # in Mg per km^2
 # [1] 1691236544 # this is the same as cellStats(Sala_CO2_efflux.raw, stat="sum")
 
 # but this value (1.69 Pg CO2) is not the same as the 1.47 Pg CO2 reported in the 
-# Sala et al. paper ... email to jmayorga@bren.ucsb.edu pending
+# Sala et al. paper
+
+# email to jmayorga@bren.ucsb.edu (replied within an hour -- thanks Juan) yielded
+# following advice: "the fluxes in the Geotiff are per km2, so please make sure
+# to multiply times the pixel’s area before summing up."
+
+# so we can adjust accordingly
+
+SalaModel_cell_area <- 934.4789^2/1000000 # from https://github.com/jamesrco/ocean-conservation-priorities/blob/master/data_prep/update_bottom_trawling_impact.Rmd
+
+sum(adjCO2efflux.25yr, na.rm=T)*SalaModel_cell_area*(1/10^9) # in Pg CO2
+# [1] 0.02312638
+sum(adjCO2efflux.50yr, na.rm=T)*SalaModel_cell_area*(1/10^9) # in Pg CO2
+# [1] 0.03195735
+sum(adjCO2efflux.100yr, na.rm=T)*SalaModel_cell_area*(1/10^9) # in Pg CO2
+# [1] 0.04564765
+sum(Sala_CO2_efflux.df$co2_efflux, na.rm=T)*SalaModel_cell_area*(1/10^9) # in Pg CO2
+# [1] 1.476874 # *** now this matches the value in the Sala et al paper
 
 # # send email when done ... assumes SSMTP has been installed and config file and text file for the email are in right place, etc.
 # 
