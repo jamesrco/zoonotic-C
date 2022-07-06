@@ -28,7 +28,23 @@
 % 0-1000 years
 
 % Find the near-bottom ocean grid cells and plot the fraction of
-% CO2 remaining sequestered after 25, 50, and then 100 years
+% CO2 remaining sequestered after 1, 25, 50, and then 100 years
+
+% make a 3-d array of the fraction sequestered after 1 year
+[ny,nx,nz] = size(MASK);
+FSEQ_1yr = 0*MASK+NaN;
+t_indx = find(time==1); % find the index of the 1st year
+FSEQ_1yr(MASK==1) = fseq(:,t_indx);
+% now find the near-bottom ocean grid cells
+fseq_bottom_1yr = 0*MASK(:,:,1)+NaN;
+TOPO = sum(MASK,3); % number of grid cells in the vertical direction
+for i = 1:ny
+  for j = 1:nx
+    if TOPO(i,j)~=0
+      fseq_bottom_1yr(i,j) = FSEQ_1yr(i,j,TOPO(i,j));
+    end
+  end
+end
 
 % make a 3-d array of the fraction sequestered after 25 years
 [ny,nx,nz] = size(MASK);
@@ -83,6 +99,7 @@ bottom_depth = sum(VOL.*MASK,3)./AREA(:,:,1); % depth of the ocean at each water
 
 % export the arrays as .csv
 
+writematrix(fseq_bottom_1yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_1yr.csv')
 writematrix(fseq_bottom_25yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_25yr.csv')
 writematrix(fseq_bottom_50yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_50yr.csv')
 writematrix(fseq_bottom_100yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_100yr.csv')

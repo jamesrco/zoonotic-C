@@ -38,6 +38,8 @@ library(parallel) # part of base; doesn't need to be installed
 
 # load these output files
 
+fseq_bottom_1yr.raw <- read.csv("data/derived/benthic_seqfractions/fseq_bottom_1yr.csv",
+                                 header = FALSE)
 fseq_bottom_25yr.raw <- read.csv("data/derived/benthic_seqfractions/fseq_bottom_25yr.csv",
                             header = FALSE)
 fseq_bottom_50yr.raw <- read.csv("data/derived/benthic_seqfractions/fseq_bottom_50yr.csv",
