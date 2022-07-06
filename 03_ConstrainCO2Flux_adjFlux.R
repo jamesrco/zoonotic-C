@@ -117,12 +117,19 @@ adjCO2efflux.100yr$adjCO2_efflux.100yr[ind.nonZeroCO2] <- adjCO2efflux.100yr_non
 save(adjCO2efflux.100yr, file = "data/derived/output/adjCO2efflux.100yr.RData")
 gc()
 
-# get some basic statistics; with unadjusted data for comparison
+# get some basic statistics; with unadjusted Sala et al data for comparison
 
 sum(adjCO2efflux.25yr, na.rm=T)
+# [1] 26483089
 sum(adjCO2efflux.50yr, na.rm=T)
+# [1] 36595847
 sum(adjCO2efflux.100yr, na.rm=T)
-sum(Sala_CO2_efflux.df$co2_efflux, na.rm=T)
+# [1] 52273243
+sum(Sala_CO2_efflux.df$co2_efflux, na.rm=T) # in Mg per km^2
+# [1] 1691236544 # this is the same as cellStats(Sala_CO2_efflux.raw, stat="sum")
+
+# but this value (1.69 Pg CO2) is not the same as the 1.47 Pg CO2 reported in the 
+# Sala et al. paper ... email to jmayorga@bren.ucsb.edu pending
 
 # # send email when done ... assumes SSMTP has been installed and config file and text file for the email are in right place, etc.
 # 
