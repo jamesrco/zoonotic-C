@@ -40,9 +40,15 @@ library(parallel) # part of base; doesn't need to be installed
 
 fseq_bottom_1yr.raw <- read.csv("data/derived/benthic_seqfractions/fseq_bottom_1yr.csv",
                                  header = FALSE)
+fseq_bottom_5yr.raw <- read.csv("data/derived/benthic_seqfractions/fseq_bottom_5yr.csv",
+                                 header = FALSE)
+fseq_bottom_10yr.raw <- read.csv("data/derived/benthic_seqfractions/fseq_bottom_10yr.csv",
+                                 header = FALSE)
 fseq_bottom_25yr.raw <- read.csv("data/derived/benthic_seqfractions/fseq_bottom_25yr.csv",
                             header = FALSE)
 fseq_bottom_50yr.raw <- read.csv("data/derived/benthic_seqfractions/fseq_bottom_50yr.csv",
+                                 header = FALSE)
+fseq_bottom_75yr.raw <- read.csv("data/derived/benthic_seqfractions/fseq_bottom_75yr.csv",
                                  header = FALSE)
 fseq_bottom_100yr.raw <- read.csv("data/derived/benthic_seqfractions/fseq_bottom_100yr.csv",
                                  header = FALSE)

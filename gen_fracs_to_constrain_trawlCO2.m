@@ -47,6 +47,54 @@ for i = 1:ny
   end
 end
 
+% make a 3-d array of the fraction sequestered after 1 year
+[ny,nx,nz] = size(MASK);
+FSEQ_1yr = 0*MASK+NaN;
+t_indx = find(time==1); % find the index of the 1st year
+FSEQ_1yr(MASK==1) = fseq(:,t_indx);
+% now find the near-bottom ocean grid cells
+fseq_bottom_1yr = 0*MASK(:,:,1)+NaN;
+TOPO = sum(MASK,3); % number of grid cells in the vertical direction
+for i = 1:ny
+  for j = 1:nx
+    if TOPO(i,j)~=0
+      fseq_bottom_1yr(i,j) = FSEQ_1yr(i,j,TOPO(i,j));
+    end
+  end
+end
+
+% make a 3-d array of the fraction sequestered after 5 years
+[ny,nx,nz] = size(MASK);
+FSEQ_5yr = 0*MASK+NaN;
+t_indx = find(time==5); % find the index of the 5'th year
+FSEQ_5yr(MASK==1) = fseq(:,t_indx);
+% now find the near-bottom ocean grid cells
+fseq_bottom_5yr = 0*MASK(:,:,1)+NaN;
+TOPO = sum(MASK,3); % number of grid cells in the vertical direction
+for i = 1:ny
+  for j = 1:nx
+    if TOPO(i,j)~=0
+      fseq_bottom_5yr(i,j) = FSEQ_5yr(i,j,TOPO(i,j));
+    end
+  end
+end
+
+% make a 3-d array of the fraction sequestered after 10 years
+[ny,nx,nz] = size(MASK);
+FSEQ_10yr = 0*MASK+NaN;
+t_indx = find(time==10); % find the index of the 10'th year
+FSEQ_10yr(MASK==1) = fseq(:,t_indx);
+% now find the near-bottom ocean grid cells
+fseq_bottom_10yr = 0*MASK(:,:,1)+NaN;
+TOPO = sum(MASK,3); % number of grid cells in the vertical direction
+for i = 1:ny
+  for j = 1:nx
+    if TOPO(i,j)~=0
+      fseq_bottom_10yr(i,j) = FSEQ_10yr(i,j,TOPO(i,j));
+    end
+  end
+end
+
 % make a 3-d array of the fraction sequestered after 25 years
 [ny,nx,nz] = size(MASK);
 FSEQ_25yr = 0*MASK+NaN;
@@ -63,18 +111,18 @@ for i = 1:ny
   end
 end
 
-% make a 3-d array of the fraction sequestered after 50 years
+% make a 3-d array of the fraction sequestered after 75 years
 [ny,nx,nz] = size(MASK);
-FSEQ_50yr = 0*MASK+NaN;
-t_indx = find(time==50); % find the index of the 50'th year
-FSEQ_50yr(MASK==1) = fseq(:,t_indx);
+FSEQ_75yr = 0*MASK+NaN;
+t_indx = find(time==75); % find the index of the 75'th year
+FSEQ_75yr(MASK==1) = fseq(:,t_indx);
 % now find the near-bottom ocean grid cells
-fseq_bottom_50yr = 0*MASK(:,:,1)+NaN;
+fseq_bottom_75yr = 0*MASK(:,:,1)+NaN;
 TOPO = sum(MASK,3); % number of grid cells in the vertical direction
 for i = 1:ny
   for j = 1:nx
     if TOPO(i,j)~=0
-      fseq_bottom_50yr(i,j) = FSEQ_50yr(i,j,TOPO(i,j));
+      fseq_bottom_75yr(i,j) = FSEQ_75yr(i,j,TOPO(i,j));
     end
   end
 end
@@ -111,17 +159,45 @@ for i = 1:ny
   end
 end
 
+% calculate the sum of the emission fractions (1 - sequestration fraction)
+% for every year from 1 to 100 years; store
+SUM_FEMIT_1to100 = zeros(100,2);
+SUM_FEMIT_1to100(:,1) = 1:100;
+
+for i = 1:100
+    [ny,nx,nz] = size(MASK);
+    FSEQ_thisyr = 0*MASK+NaN;
+    t_indx = find(time==i); % find the index of the i'th year
+    FSEQ_thisyr(MASK==1) = fseq(:,t_indx);
+    % now find the near-bottom ocean grid cells
+    fseq_bottom_thisyr = 0*MASK(:,:,1)+NaN;
+    TOPO = sum(MASK,3); % number of grid cells in the vertical direction
+    for j = 1:ny
+        for k = 1:nx
+            if TOPO(j,k)~=0
+                fseq_bottom_thisyr(j,k) = FSEQ_thisyr(j,k,TOPO(j,k));
+            end
+        end
+    end
+    SUM_FEMIT_thisyr = sum((1-fseq_bottom_thisyr()), 'all', 'omitnan');
+    SUM_FEMIT_1to100(i,2) = SUM_FEMIT_thisyr;
+end
+
 % find the bottom depth
 bottom_depth = sum(VOL.*MASK,3)./AREA(:,:,1); % depth of the ocean at each water column
 
 % export the arrays as .csv
 
 writematrix(fseq_bottom_1yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_1yr.csv')
+writematrix(fseq_bottom_5yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_5yr.csv')
+writematrix(fseq_bottom_10yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_10yr.csv')
 writematrix(fseq_bottom_25yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_25yr.csv')
 writematrix(fseq_bottom_50yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_50yr.csv')
+writematrix(fseq_bottom_75yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_75yr.csv')
 writematrix(fseq_bottom_100yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_100yr.csv')
 writematrix(fseq_bottom_1000yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_1000yr.csv')
 writematrix(bottom_depth,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/bottom_depth_m.csv')
+writematrix(SUM_FEMIT_1to100,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/sum_of_fseq_bottom_1to100years.csv')
 writematrix(LAT(:,1,1),'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/lat_degN.csv')
 writematrix(LON(1,:,1),'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/long_degE.csv')
 
