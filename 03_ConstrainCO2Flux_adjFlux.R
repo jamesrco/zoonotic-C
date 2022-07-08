@@ -334,9 +334,9 @@ predicted.PgCO2_per_year_to_atmos[,2] <- predict(model2,newdata=data.frame(Sum_e
 # https://github.com/emlab-ucsb/ocean-conservation-priorities/blob/master/ancillary_analyses/timing_of_trawling_impacts.Rmd
 # *** this is where the assertion in the Sala et al. paper that sediment emissions
 # in the first year are 1.47 Pg CO2, declining after 10 y to 0.58 Pg CO2, comes from 
-# 2. the fraction of the sediment emissions in year n that will reach the atmosphere
-# after 100 y is described by the benthic emissions fraction for the nth year 
-# based on Siegel et al. 2021
+# 2. the fraction of the sediment CO2 emissions in year n that will have reached the
+# atmosphere 100-n years later is described by the benthic emissions fraction
+# for the nth year based on Siegel et al. 2021 (1 - fseq_bottom)
 
 sum(rev(predicted.PgCO2_per_year_to_atmos[,2])*(Sala_et_al_trawlTiming_results.raw$C_remin[1:100]/
                                                   Sala_et_al_trawlTiming_results.raw$C_remin[1]))
