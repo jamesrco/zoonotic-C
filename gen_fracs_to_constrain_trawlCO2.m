@@ -1,5 +1,5 @@
 % gen_fracs_to_constrain_trawlCO2.m
-% Created June 7, 2022 by Jamie Collins, jcollins@edf.org, bassed on the script 
+% Created June 7, 2022 by Jamie Collins, jcollins@edf.org, based on the script 
 % plot_sequestration_fraction.m provided by Siegel et al. at
 %  https://doi.org/10.6084/m9.figshare.15228690.v2
 % Note: Assumes user has loaded "fseq_OCIM2_48L.mat" into memory 
@@ -30,22 +30,6 @@
 % Find the near-bottom ocean grid cells and plot the fraction of
 % CO2 remaining sequestered after 1, 25, 50, and then 100 years ... plus
 % 1000 y as a check
-
-% make a 3-d array of the fraction sequestered after 1 year
-[ny,nx,nz] = size(MASK);
-FSEQ_1yr = 0*MASK+NaN;
-t_indx = find(time==1); % find the index of the 1st year
-FSEQ_1yr(MASK==1) = fseq(:,t_indx);
-% now find the near-bottom ocean grid cells
-fseq_bottom_1yr = 0*MASK(:,:,1)+NaN;
-TOPO = sum(MASK,3); % number of grid cells in the vertical direction
-for i = 1:ny
-  for j = 1:nx
-    if TOPO(i,j)~=0
-      fseq_bottom_1yr(i,j) = FSEQ_1yr(i,j,TOPO(i,j));
-    end
-  end
-end
 
 % make a 3-d array of the fraction sequestered after 1 year
 [ny,nx,nz] = size(MASK);
@@ -183,10 +167,34 @@ for i = 1:100
     SUM_FEMIT_1to100(i,2) = SUM_FEMIT_thisyr;
 end
 
+% make a 3-d array of the fractions sequestered at the benthic depth
+% after 1-200 (inclusive) years, plus years 300, 400, ... 900, 1000
+fseq_bottom_multyears = zeros([size(MASK,1:2), 208]);
+years = [1:200 300 400 500 600 700 800 900 1000];
+
+for i = 1:length(years)
+    [ny,nx,nz] = size(MASK);
+    FSEQ_thisyr = 0*MASK+NaN;
+    t_indx = find(time==years(i)); % find the index of the i'th year
+    FSEQ_thisyr(MASK==1) = fseq(:,t_indx);
+    % now find the near-bottom ocean grid cells
+    fseq_bottom_thisyr = 0*MASK(:,:,1)+NaN;
+    TOPO = sum(MASK,3); % number of grid cells in the vertical direction
+    for j = 1:ny
+        for k = 1:nx
+            if TOPO(j,k)~=0
+                fseq_bottom_thisyr(j,k) = FSEQ_thisyr(j,k,TOPO(j,k));
+            end
+        end
+    end
+    (:,:,i) = fseq_bottom_thisyr;
+end
+
 % find the bottom depth
 bottom_depth = sum(VOL.*MASK,3)./AREA(:,:,1); % depth of the ocean at each water column
 
-% export the arrays as .csv
+% export the individual year arrays as .csv; multiple year array of
+% matrixes .mat file
 
 writematrix(fseq_bottom_1yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_1yr.csv')
 writematrix(fseq_bottom_5yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_5yr.csv')
@@ -200,6 +208,9 @@ writematrix(bottom_depth,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_s
 writematrix(SUM_FEMIT_1to100,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/sum_of_fseq_bottom_1to100years.csv')
 writematrix(LAT(:,1,1),'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/lat_degN.csv')
 writematrix(LON(1,:,1),'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/long_degE.csv')
+
+writematrix(years,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/benthic_years.csv')
+save('/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_multyears.mat','fseq_bottom_multyears')
 
 % % plot both the fraction remaining after 100 years and the bottom depth
 % figure(1)
