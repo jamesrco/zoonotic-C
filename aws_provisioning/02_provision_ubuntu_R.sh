@@ -47,4 +47,4 @@ echo "Y" | sudo DEBIAN_FRONTEND=noninteractive apt install -y libomp-dev
 
 echo "Y" | sudo DEBIAN_FRONTEND=noninteractive apt install -y libudunits2-dev libgdal-dev libgeos-dev libproj-dev libfontconfig1-dev
 
-echo "Y" | sudo DEBIAN_FRONTEND=noninteractive apt install -y r-base-dev r-cran-sf r-cran-raster r-cran-rjava r-cran-data.table
+echo "Y" | sudo DEBIAN_FRONTEND=noninteractive apt install -y r-base-dev r-cran-sf r-cran-raster r-cran-rjava r-cran-data.table r-cran-R.matlab
