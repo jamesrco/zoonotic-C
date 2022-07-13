@@ -1,13 +1,16 @@
-# 03_ConstrainCO2Flux_adjFlux.R
-# Created July 5, 2022
-# Purpose: Third in series of scripts used to constrain the estimate of
-# benthic CO2 flux in Sala  et al. 2021 using the sequestration fractions in
-# Siegel et al. 2021
+# 03b_ConstrainCO2Flux_adjFlux_extended.R
+# Created July 12, 2022
+# Purpose: Alternate, more robust version for third in series of scripts used
+# to constrain the estimate of benthic CO2 flux in Sala  et al. 2021 using the
+# sequestration fractions in Siegel et al. 2021
 # Author: Jamie Collins, jcollins@edf.org
 
-# This third script performs the actual adjustment of the Sala et al. benthic
-# CO2 flux data and includes a time-integrated calculation for total emissions
-# to the atmosphere over a 100 year time period
+# This alternate third script performs the actual adjustment of the Sala et al
+# benthic CO2 flux data and includes a time-integrated calculation for total
+# emissions to the atmosphere over a 100 year time period. This script is
+# different than the primary version of the third script (03a_ConstrainCO2Flux_adjFlux.R)
+# in that calculations for each year are made explictly, rather than estimated
+# using a prediction curve constructed from a subset of values
 
 # *** Assumes user has already run 01_ConstrainCO2Flux_IO.R (in current session)
 # and that the object "coord.matches.RData" generated using
