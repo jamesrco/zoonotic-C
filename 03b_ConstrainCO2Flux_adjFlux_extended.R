@@ -115,7 +115,7 @@ for (i in 1:nrow(predicted.PgCO2_per_year_to_atmos)) {
   
   EffluxFracs.thisyear <- genEffluxFracs(i)
   adjCO2efflux.thisyear <- unlist(lapply(ind.nonZeroCO2, constrainFlux, EffluxFracs.thisyear))
-  predicted.PgCO2_per_year_to_atmos(i,2) <- sum(adjCO2efflux.thisyear*SalaModel_cell_area, na.rm=T)*(1/10^9)
+  predicted.PgCO2_per_year_to_atmos[i,2] <- sum(adjCO2efflux.thisyear*SalaModel_cell_area, na.rm=T)*(1/10^9)
   
   time1 <- Sys.time()
   print(time1 - time0)
