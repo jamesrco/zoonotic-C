@@ -1,4 +1,4 @@
-# 03_ConstrainCO2Flux_adjFlux.R
+# 03a_ConstrainCO2Flux_adjFlux.R
 # Created July 5, 2022
 # Purpose: Third in series of scripts used to constrain the estimate of
 # benthic CO2 flux in Sala  et al. 2021 using the sequestration fractions in
