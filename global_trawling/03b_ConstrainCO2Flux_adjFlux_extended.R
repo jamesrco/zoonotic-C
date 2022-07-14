@@ -15,7 +15,7 @@
 # *** Assumes user has already run 01_ConstrainCO2Flux_IO.R (in current session)
 # and that the object "coord.matches.RData" generated using
 # 02_ConstrainCO2Flux_coordMatch.R (likely via AWS) is present in
-# zoonotic-c/data/derived/output/
+# zoonotic-c/data/global_trawling/derived/output/
 
 # set the working directory; create directory for output
 
@@ -40,19 +40,19 @@ library(R.matlab) # to read .mat file
 
 # if not already loaded, load in the file containing the coordinate matches,
 # generated in previous script 02_ConstrainCO2Flux_coordMatch.R and saved to 
-# zoonotic-c/data/derived/output/
+# zoonotic-c/data/global_trawling/derived/output/
 
-load("data/derived/output/coord.matches.RData")
+load("data/global_trawling/derived/output/coord.matches.RData")
 
 # load the benthic sequestration fractions for entire Siegel et al. model domain,
 # from 1-200 y, then 200-1000 y in 100 y increments
 # also load the years
 
-fseq_bottom_multYears.raw <- readMat("data/derived/benthic_seqfractions/fseq_bottom_multyears.mat")
+fseq_bottom_multYears.raw <- readMat("data/global_trawling/derived/benthic_seqfractions/fseq_bottom_multyears.mat")
 fseq_bottom.multyears <- fseq_bottom_multYears.raw$fseq.bottom.multyears # clean up a bit
 fseq_bottom.multyears[fseq_bottom.multyears>=1] <- 1
 
-seqFracYears.raw <- read.csv(file = "data/derived/benthic_seqfractions/benthic_years.csv",
+seqFracYears.raw <- read.csv(file = "data/global_trawling/derived/benthic_seqfractions/benthic_years.csv",
                              header = FALSE)
 
 # load the year-by-year predicted global CO2 sediment remineralization rates from Sala et al.
@@ -60,7 +60,7 @@ seqFracYears.raw <- read.csv(file = "data/derived/benthic_seqfractions/benthic_y
 # model beginning on line 119 in
 # https://github.com/emlab-ucsb/ocean-conservation-priorities/blob/master/ancillary_analyses/timing_of_trawling_impacts.Rmd)
 
-Sala_et_al_trawlTiming_results.raw <- read.csv(file = "data/derived/sala_et_al_2021_model/Sala_et_al_trawlTiming_results.csv",
+Sala_et_al_trawlTiming_results.raw <- read.csv(file = "data/global_trawling/derived/sala_et_al_2021_model/Sala_et_al_trawlTiming_results.csv",
                                            header = TRUE) 
 
 colnames(Sala_et_al_trawlTiming_results.raw)[1] <- c("Year")
@@ -125,7 +125,7 @@ for (i in 1:nrow(predicted.PgCO2_per_year_to_atmos)) {
 
 # save
 
-write.csv(predicted.PgCO2_per_year_to_atmos, file = "data/derived/output/adjCO2efflux_PgCO2_yr.csv",
+write.csv(predicted.PgCO2_per_year_to_atmos, file = "data/global_trawling/derived/output/adjCO2efflux_PgCO2_yr.csv",
           row.names = FALSE)
 
 # now we can make time-integrated estimates of total emissions to the atmosphere
@@ -158,7 +158,7 @@ for (i in 1:nrow(adjCO2efflux_PgCO2_cumulative)) {
   
 }
 
-write.csv(adjCO2efflux_PgCO2_cumulative, file = "data/derived/output/adjCO2efflux_PgCO2_cumulative.csv",
+write.csv(adjCO2efflux_PgCO2_cumulative, file = "data/global_trawling/derived/output/adjCO2efflux_PgCO2_cumulative.csv",
           row.names = FALSE)
 
 plot(adjCO2efflux_PgCO2_cumulative$Year, adjCO2efflux_PgCO2_cumulative$PgCO2_to_atmos_cumulative,

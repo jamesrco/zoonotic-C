@@ -196,21 +196,21 @@ bottom_depth = sum(VOL.*MASK,3)./AREA(:,:,1); % depth of the ocean at each water
 % export the individual year arrays as .csv; multiple year array of
 % matrixes .mat file
 
-writematrix(fseq_bottom_1yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_1yr.csv')
-writematrix(fseq_bottom_5yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_5yr.csv')
-writematrix(fseq_bottom_10yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_10yr.csv')
-writematrix(fseq_bottom_25yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_25yr.csv')
-writematrix(fseq_bottom_50yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_50yr.csv')
-writematrix(fseq_bottom_75yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_75yr.csv')
-writematrix(fseq_bottom_100yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_100yr.csv')
-writematrix(fseq_bottom_1000yr,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_1000yr.csv')
-writematrix(bottom_depth,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/bottom_depth_m.csv')
-writematrix(SUM_FEMIT_1to100,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/sum_of_fseq_bottom_1to100years.csv')
-writematrix(LAT(:,1,1),'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/lat_degN.csv')
-writematrix(LON(1,:,1),'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/long_degE.csv')
+writematrix(fseq_bottom_1yr,'/Users/jamesrco/Code/zoonotic-C/data/global_trawling/derived/benthic_seqfractions/fseq_bottom_1yr.csv')
+writematrix(fseq_bottom_5yr,'/Users/jamesrco/Code/zoonotic-C/data/global_trawling/derived/benthic_seqfractions/fseq_bottom_5yr.csv')
+writematrix(fseq_bottom_10yr,'/Users/jamesrco/Code/zoonotic-C/data/global_trawling/derived/benthic_seqfractions/fseq_bottom_10yr.csv')
+writematrix(fseq_bottom_25yr,'/Users/jamesrco/Code/zoonotic-C/data/global_trawling/derived/benthic_seqfractions/fseq_bottom_25yr.csv')
+writematrix(fseq_bottom_50yr,'/Users/jamesrco/Code/zoonotic-C/data/global_trawling/derived/benthic_seqfractions/fseq_bottom_50yr.csv')
+writematrix(fseq_bottom_75yr,'/Users/jamesrco/Code/zoonotic-C/data/global_trawling/derived/benthic_seqfractions/fseq_bottom_75yr.csv')
+writematrix(fseq_bottom_100yr,'/Users/jamesrco/Code/zoonotic-C/data/global_trawling/derived/benthic_seqfractions/fseq_bottom_100yr.csv')
+writematrix(fseq_bottom_1000yr,'/Users/jamesrco/Code/zoonotic-C/data/global_trawling/derived/benthic_seqfractions/fseq_bottom_1000yr.csv')
+writematrix(bottom_depth,'/Users/jamesrco/Code/zoonotic-C/data/global_trawling/derived/benthic_seqfractions/bottom_depth_m.csv')
+writematrix(SUM_FEMIT_1to100,'/Users/jamesrco/Code/zoonotic-C/data/global_trawling/derived/benthic_seqfractions/sum_of_fseq_bottom_1to100years.csv')
+writematrix(LAT(:,1,1),'/Users/jamesrco/Code/zoonotic-C/data/global_trawling/derived/benthic_seqfractions/lat_degN.csv')
+writematrix(LON(1,:,1),'/Users/jamesrco/Code/zoonotic-C/data/global_trawling/derived/benthic_seqfractions/long_degE.csv')
 
-writematrix(years,'/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/benthic_years.csv')
-save('/Users/jamesrco/Code/zoonotic-C/data/derived/benthic_seqfractions/fseq_bottom_multyears.mat','fseq_bottom_multyears')
+writematrix(years,'/Users/jamesrco/Code/zoonotic-C/data/global_trawling/derived/benthic_seqfractions/benthic_years.csv')
+save('/Users/jamesrco/Code/zoonotic-C/data/global_trawling/derived/benthic_seqfractions/fseq_bottom_multyears.mat','fseq_bottom_multyears')
 
 % % plot both the fraction remaining after 100 years and the bottom depth
 % figure(1)

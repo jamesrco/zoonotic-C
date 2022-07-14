@@ -12,7 +12,7 @@
 # *** Assumes user has already run 01_ConstrainCO2Flux_IO.R (in current session)
 # and that the object "coord.matches.RData" generated using
 # 02_ConstrainCO2Flux_coordMatch.R (likely via AWS) is present in
-# zoonotic-c/data/derived/output/
+# zoonotic-c/data/global_trawling/derived/output/
 
 # set the working directory; create directory for output
 
@@ -36,14 +36,14 @@ library(parallel) # part of base; doesn't need to be installed
 
 # if not already loaded, load in the file containing the coordinate matches,
 # generated in previous script 02_ConstrainCO2Flux_coordMatch.R and saved to 
-# zoonotic-c/data/derived/output/
+# zoonotic-c/data/global_trawling/derived/output/
 
-load("data/derived/output/coord.matches.RData")
+load("data/global_trawling/derived/output/coord.matches.RData")
 
 # load the summed emissions fractions for 1 to 100 y (previously generated using 
 # gen_fracs_to_constrain_trawlCO2.m)
 
-sum_of_fseq_bottom_1to100years.raw <- read.csv(file = "data/derived/benthic_seqfractions/sum_of_fseq_bottom_1to100years.csv",
+sum_of_fseq_bottom_1to100years.raw <- read.csv(file = "data/global_trawling/derived/benthic_seqfractions/sum_of_fseq_bottom_1to100years.csv",
                                                header = FALSE)
 
 # load the year-by-year predicted global CO2 sediment remineralization rates from Sala et al.
@@ -51,7 +51,7 @@ sum_of_fseq_bottom_1to100years.raw <- read.csv(file = "data/derived/benthic_seqf
 # model beginning on line 119 in
 # https://github.com/emlab-ucsb/ocean-conservation-priorities/blob/master/ancillary_analyses/timing_of_trawling_impacts.Rmd)
 
-Sala_et_al_trawlTiming_results.raw <- read.csv(file = "data/derived/sala_et_al_2021_model/Sala_et_al_trawlTiming_results.csv",
+Sala_et_al_trawlTiming_results.raw <- read.csv(file = "data/global_trawling/derived/sala_et_al_2021_model/Sala_et_al_trawlTiming_results.csv",
                                            header = TRUE) 
 
 colnames(Sala_et_al_trawlTiming_results.raw)[1] <- c("Year")
@@ -135,7 +135,7 @@ print(time1 - time0)
 adjCO2efflux.1yr <- as.data.frame(matrix(data = NA, nrow = length(Sala_CO2_efflux.df$co2_efflux), ncol = 1))
 colnames(adjCO2efflux.1yr) <- c("adjCO2_efflux.1yr")
 adjCO2efflux.1yr$adjCO2_efflux.1yr[ind.nonZeroCO2] <- adjCO2efflux.1yr_nonZero
-save(adjCO2efflux.1yr, file = "data/derived/output/adjCO2efflux.1yr.RData")
+save(adjCO2efflux.1yr, file = "data/global_trawling/derived/output/adjCO2efflux.1yr.RData")
 gc()
 
 # 25 year scenario
@@ -148,7 +148,7 @@ print(time1 - time0)
 adjCO2efflux.25yr <- as.data.frame(matrix(data = NA, nrow = length(Sala_CO2_efflux.df$co2_efflux), ncol = 1))
 colnames(adjCO2efflux.25yr) <- c("adjCO2_efflux.25yr")
 adjCO2efflux.25yr$adjCO2_efflux.25yr[ind.nonZeroCO2] <- adjCO2efflux.25yr_nonZero
-save(adjCO2efflux.25yr, file = "data/derived/output/adjCO2efflux.25yr.RData")
+save(adjCO2efflux.25yr, file = "data/global_trawling/derived/output/adjCO2efflux.25yr.RData")
 gc()
 
 # 50 year scenario
@@ -161,7 +161,7 @@ print(time1 - time0)
 adjCO2efflux.50yr <- as.data.frame(matrix(data = NA, nrow = length(Sala_CO2_efflux.df$co2_efflux), ncol = 1))
 colnames(adjCO2efflux.50yr) <- c("adjCO2_efflux.50yr")
 adjCO2efflux.50yr$adjCO2_efflux.50yr[ind.nonZeroCO2] <- adjCO2efflux.50yr_nonZero
-save(adjCO2efflux.50yr, file = "data/derived/output/adjCO2efflux.50yr.RData")
+save(adjCO2efflux.50yr, file = "data/global_trawling/derived/output/adjCO2efflux.50yr.RData")
 gc()
 
 # 100 year scenario
@@ -174,7 +174,7 @@ print(time1 - time0)
 adjCO2efflux.100yr <- as.data.frame(matrix(data = NA, nrow = length(Sala_CO2_efflux.df$co2_efflux), ncol = 1))
 colnames(adjCO2efflux.100yr) <- c("adjCO2_efflux.100yr")
 adjCO2efflux.100yr$adjCO2_efflux.100yr[ind.nonZeroCO2] <- adjCO2efflux.100yr_nonZero
-save(adjCO2efflux.100yr, file = "data/derived/output/adjCO2efflux.100yr.RData")
+save(adjCO2efflux.100yr, file = "data/global_trawling/derived/output/adjCO2efflux.100yr.RData")
 gc()
 
 # 1000 year scenario
@@ -187,7 +187,7 @@ print(time1 - time0)
 adjCO2efflux.1000yr <- as.data.frame(matrix(data = NA, nrow = length(Sala_CO2_efflux.df$co2_efflux), ncol = 1))
 colnames(adjCO2efflux.1000yr) <- c("adjCO2_efflux.1000yr")
 adjCO2efflux.1000yr$adjCO2_efflux.1000yr[ind.nonZeroCO2] <- adjCO2efflux.1000yr_nonZero
-save(adjCO2efflux.1000yr, file = "data/derived/output/adjCO2efflux.1000yr.RData")
+save(adjCO2efflux.1000yr, file = "data/global_trawling/derived/output/adjCO2efflux.1000yr.RData")
 gc()
 
 # 5, 10, 75 year scenarios; for prediction curve
@@ -272,7 +272,7 @@ names(adjCO2efflux_PgCO2_yr) <- c("adjCO2efflux.1yr_PgCO2_per_y",
                                   "adjCO2efflux.1000yr_PgCO2_per_y",
                                   "CO2efflux_PgCO2_per_y.unadjusted")
 
-write.csv(adjCO2efflux_PgCO2_yr, file = "data/derived/output/adjCO2efflux_PgCO2_yr.csv",
+write.csv(adjCO2efflux_PgCO2_yr, file = "data/global_trawling/derived/output/adjCO2efflux_PgCO2_yr.csv",
           row.names = TRUE)
 
 # now we can make a time-integrated estimate of total emissions to the
