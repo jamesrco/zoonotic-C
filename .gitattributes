@@ -1,2 +1,2 @@
 fseq_OCIM2_48L.nc filter=lfs diff=lfs merge=lfs -text
-data/derived/output/coord.matches.RData filter=lfs diff=lfs merge=lfs -text
+data/global_trawling/derived/output/coord.matches.RData filter=lfs diff=lfs merge=lfs -text
