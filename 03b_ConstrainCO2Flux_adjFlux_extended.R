@@ -107,13 +107,14 @@ predicted.PgCO2_per_year_to_atmos[,1] <- unlist(seqFracYears.raw)
 
 # iterate
 
-for (i in 1:nrow(predicted.PgCO2_per_year_to_atmos)) {
+for (i in 200:nrow(predicted.PgCO2_per_year_to_atmos)) {
 
   print(predicted.PgCO2_per_year_to_atmos[i,1])
   
   time0 <- Sys.time()
   
-  EffluxFracs.thisyear <- genEffluxFracs(i)
+  thisYear <- predicted.PgCO2_per_year_to_atmos[i,1]
+  EffluxFracs.thisyear <- genEffluxFracs(thisYear)
   adjCO2efflux.thisyear <- unlist(lapply(ind.nonZeroCO2, constrainFlux, EffluxFracs.thisyear))
   predicted.PgCO2_per_year_to_atmos[i,2] <- sum(adjCO2efflux.thisyear*SalaModel_cell_area, na.rm=T)*(1/10^9)
   
@@ -121,6 +122,11 @@ for (i in 1:nrow(predicted.PgCO2_per_year_to_atmos)) {
   print(time1 - time0)
   
 }
+
+# save
+
+write.csv(predicted.PgCO2_per_year_to_atmos, file = "data/derived/output/adjCO2efflux_PgCO2_yr.csv",
+          row.names = FALSE)
 
 # now we can make time-integrated estimates of total emissions to the atmosphere
 # can pick our base year, using 100 y as example
@@ -141,12 +147,18 @@ for (i in 1:nrow(predicted.PgCO2_per_year_to_atmos)) {
 timeInt.PgCO2_to_atmos.100y <- sum(rev(predicted.PgCO2_per_year_to_atmos[1:100,2])*(Sala_et_al_trawlTiming_results.raw$C_remin[1:100]/
                                                   Sala_et_al_trawlTiming_results.raw$C_remin[1]))
 
+# [1] 1.265947
+
+# after 100 y of continuous trawling, a cumulative 1.27 Pg CO2 will have reached the atmosphere 
+
 # 200 year time period
 
 timeInt.PgCO2_to_atmos.200y <- sum(rev(predicted.PgCO2_per_year_to_atmos[1:200,2])*(Sala_et_al_trawlTiming_results.raw$C_remin[1:200]/
                                                                                  Sala_et_al_trawlTiming_results.raw$C_remin[1]))
 
-# after 100 y of continuous trawling, a cumulative 1.27 Pg CO2 will have reached the atmosphere 
+# [1] 3.945729
+
+# after 100 y of continuous trawling, a cumulative 3.95 Pg CO2 will have reached the atmosphere 
 
 # # send email when done ... assumes SSMTP has been installed and config file and text file for the email are in right place, etc.
 # 
