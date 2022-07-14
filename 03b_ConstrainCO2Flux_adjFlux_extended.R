@@ -107,7 +107,7 @@ predicted.PgCO2_per_year_to_atmos[,1] <- unlist(seqFracYears.raw)
 
 # iterate
 
-for (i in 200:nrow(predicted.PgCO2_per_year_to_atmos)) {
+for (i in 1:nrow(predicted.PgCO2_per_year_to_atmos)) {
 
   print(predicted.PgCO2_per_year_to_atmos[i,1])
   
@@ -129,7 +129,6 @@ write.csv(predicted.PgCO2_per_year_to_atmos, file = "data/derived/output/adjCO2e
           row.names = FALSE)
 
 # now we can make time-integrated estimates of total emissions to the atmosphere
-# can pick our base year, using 100 y as example
 
 # assumes:
 # 1. annual CO2 flux from sediments follows the trend posited by Sala et al. 2021,
@@ -141,24 +140,33 @@ write.csv(predicted.PgCO2_per_year_to_atmos, file = "data/derived/output/adjCO2e
 # atmosphere 100-n years later is described by the benthic emissions fraction
 # for the nth year based on Siegel et al. 2021 (1 - fseq_bottom)
 
-# first, over a 100 year time period, using the same trawling scenario
-# as in the original Sala et al paper
+# automate; plot
 
-timeInt.PgCO2_to_atmos.100y <- sum(rev(predicted.PgCO2_per_year_to_atmos[1:100,2])*(Sala_et_al_trawlTiming_results.raw$C_remin[1:100]/
-                                                  Sala_et_al_trawlTiming_results.raw$C_remin[1]))
+adjCO2efflux_PgCO2_cumulative <- as.data.frame(matrix(data = NA, 
+                                                          nrow = 200,
+                                                          ncol = 2))
+colnames(adjCO2efflux_PgCO2_cumulative) = c("Year",
+                                            "PgCO2_to_atmos_cumulative")
+adjCO2efflux_PgCO2_cumulative[,1] <- unlist(seqFracYears.raw)[1:200]
 
-# [1] 1.265947
+for (i in 1:nrow(adjCO2efflux_PgCO2_cumulative)) {
+  
+  adjCO2efflux_PgCO2_cumulative[i,2] <- 
+    sum(rev(predicted.PgCO2_per_year_to_atmos[1:i,2])*
+          (Sala_et_al_trawlTiming_results.raw$C_remin[1:i]/
+             Sala_et_al_trawlTiming_results.raw$C_remin[1]))
+  
+}
+
+write.csv(adjCO2efflux_PgCO2_cumulative, file = "data/derived/output/adjCO2efflux_PgCO2_cumulative.csv",
+          row.names = FALSE)
+
+plot(adjCO2efflux_PgCO2_cumulative$Year, adjCO2efflux_PgCO2_cumulative$PgCO2_to_atmos_cumulative,
+     type = "l", col = "black", lwd = 1, xlab="Year", 
+     ylab = expression(paste("Pg CO"["2"]," emitted to atmosphere (cumulative)")))
 
 # after 100 y of continuous trawling, a cumulative 1.27 Pg CO2 will have reached the atmosphere 
-
-# 200 year time period
-
-timeInt.PgCO2_to_atmos.200y <- sum(rev(predicted.PgCO2_per_year_to_atmos[1:200,2])*(Sala_et_al_trawlTiming_results.raw$C_remin[1:200]/
-                                                                                 Sala_et_al_trawlTiming_results.raw$C_remin[1]))
-
-# [1] 3.945729
-
-# after 100 y of continuous trawling, a cumulative 3.95 Pg CO2 will have reached the atmosphere 
+# after 200 y of continuous trawling, a cumulative 3.95 Pg CO2 will have reached the atmosphere 
 
 # # send email when done ... assumes SSMTP has been installed and config file and text file for the email are in right place, etc.
 # 
