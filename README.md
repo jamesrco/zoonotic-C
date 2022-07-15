@@ -19,7 +19,7 @@ Calculations and figures to support Collins et al. review (in prep) of zoogeoche
 
 ![](data/arctic_trawling/spatial_inputs/trawling_analysis_input_maps.png)
     
-    **Figure 1.** An overview of the various spatial datasets [@mmoritsch](https://github.com/mmoritsch) produced for this part of the project.
+**Figure 1.** An overview of the various spatial datasets [@mmoritsch](https://github.com/mmoritsch) produced for this part of the project.
     
 ### Scripts
 
