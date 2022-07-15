@@ -1,0 +1,1 @@
+“NEAFC_NASCO_landings.xlsx” contains SAU annual average catch data (2000-2016) for bottom-trawled species managed under the Northeast Atlantic Fisheries Commission and North Atlantic Salmon Conservation Organization Regional Fisheries Management Organizations. We could cut off our search after the top 10-20 species because catch asymptotes after that (see graph on second tab). 
