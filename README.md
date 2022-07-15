@@ -3,7 +3,7 @@ Calculations and figures to support Collins et al. review (in prep) of zoogeoche
 
 ### Raw, unmodified data and files
 
-#### Benthic trawling reanalysis
+#### Global benthic trawling reanalysis
 
 * The files in [data/global_trawling/raw/sala_et_al_2021](data/global_trawling/raw/sala_et_al_2021) are from [Sala et al., 2021. Protecting the global ocean for biodiversity, food and climate. *Nature* **592**, 397–402](https://doi.org/10.1038/s41586-021-03371-z). Data files were retrieved from https://doi.org/10.25349/D9N89M on June 6, 2022. Resolution of the CO2 flux dataset (in [co2_efflux.tif]((data/global_trawling/raw/sala_et_al_2021/co2_efflux.tif)) is 1 km<sup>2</sup>. Resolution of both of the other two trawling-related datasets ([bottom_trawling_Ia.tif](data/global_trawling/raw/sala_et_al_2021/bottom_trawling_Ia.tif) and [carbon_ranking.tif](data/global_trawling/raw/sala_et_al_2021/carbon_ranking.tif) is 50 km<sup>2</sup>.)
 
@@ -17,19 +17,23 @@ Calculations and figures to support Collins et al. review (in prep) of zoogeoche
 
 * The folder [data/arctic_trawling/catch_data](data/arctic_trawling/catch_data) contains a file with annual average catch data (2000-2016) for bottom-trawled species managed under the Northeast Atlantic Fisheries Commission and North Atlantic Salmon Conservation Organization Regional Fisheries Management Organizations.
 
+![](data/arctic_trawling/spatial_inputs/trawling_analysis_input_maps.pdf)
+    
+    **Figure 1.** An overview of the various spatial datasets [@mmoritsch](https://github.com/mmoritsch) produced for this part of the project.
+    
 ### Scripts
 
 #### Shell scripts for AWS provisioning
 
 * The shell scripts in [aws_provisioning](aws_provisioning) are designed to be run in order on an AWS Ubuntu instance, to configure the remote virtual machine for running the various R scripts in this repository. They could be used to provision an Ubuntu instance to work generally with geospatial data in R. The fourth script ([04_ubuntu_mailnotify.sh](aws_provisioning/04_ubuntu_mailnotify.sh)) and accompanying text file in the "ssmtp" folder are not critical, but configure the remote machine to send simple email alerts (e.g., notification when a task is completed) to a supplied email address.
 
-#### Benthic trawling reanalysis
+#### Global benthic trawling reanalysis
 
 * The R scripts [global_trawling/01_ConstrainCO2Flux_IO.R](global_trawling/01_ConstrainCO2Flux_IO.R), [global_trawling/02_ConstrainCO2Flux_coordMatch.R](global_trawling/02_ConstrainCO2Flux_coordMatch.R), and [global_trawling/03b_ConstrainCO2Flux_adjFlux_extended.R](global_trawling/03b_ConstrainCO2Flux_adjFlux_extended.R) are the workhorse scripts for the benthic trawling reanalysis, along with [global_trawling/gen_fracs_to_constrain_trawlCO2.m](global_trawling/gen_fracs_to_constrain_trawlCO2.m). They should be run in order, with the note that some of the `library()` calls and setting of working directory are repetitive. The operations in  [global_trawling/02_ConstrainCO2Flux_coordMatch.R](global_trawling/02_ConstrainCO2Flux_coordMatch.R) are the most intensive and this is the script that really required the use of AWS. [global_trawling/03a_ConstrainCO2Flux_adjFlux.R](global_trawling/03a_ConstrainCO2Flux_adjFlux.R) is an earlier version of the third script, with a short-cut that in the end didn't really make a big impact. But the "b" version of the script doesn't take any shortcuts, so that's the one used I used for the final analysis.
 
 ### Outputs and derived data
 
-#### Benthic trawling reanalysis
+#### Global benthic trawling reanalysis
 
 * The files in [data/global_trawling/derived/benthic_seqfractions](data/global_trawling/derived/benthic_seqfractions) are sequestration fractions for bottom depths for the indicated year(s) plus necessary metadata, pulled from the [original Siegel et al. model output](data/global_trawling/raw/siegel_et_al_2021_v2) using the script [global_trawling/gen_fracs_to_constrain_trawlCO2.m](global_trawling/gen_fracs_to_constrain_trawlCO2.m). Individual .csv files contain the fractions for just the year indicated in the file name, while [fseq_bottom_multyears.mat](data/global_trawling/derived/benthic_seqfractions/fseq_bottom_multyears.mat) is a 3-D MATLAB array containing the fractions for years 1-200 in one-year increments, plus years 300-1000 in 100-year increments. [benthic_years.csv](data/global_trawling/derived/benthic_seqfractions/benthic_years.csv) is a list of the years represented in this 3-D array, corresponding to the 3rd dimension of the array.
 
@@ -44,4 +48,4 @@ Calculations and figures to support Collins et al. review (in prep) of zoogeoche
     + [adjCO2efflux_PgCO2_cumulative.csv](data/global_trawling/derived/output/adjCO2efflux_PgCO2_cumulative.csv) contains cumulative emissions estimates of CO<sub>2</sub> to the atmosphere based on the pattern of trawling-related sediment disturbance posited by Sala et al. (remineralization of 1.47 Pg CO<sub>2</sub> in the "first" year after commencement of trawling, declining to a steady rate of 0.58 Pg CO<sub>2</sub> yr<sup>-1</sup> at year 10 and beyond). For example, the analysis shows that after 100 years, a *cumulative* 1.27 Pg CO<sub>2</sub> will have been emitted to the atmosphere if trawling indeed remineralizes carbon in sediments according to the hypothesized pattern, beginning at year 0. This cumulative 1.27 Pg CO<sub>2</sub> is less than the 1.47 Pg CO<sub>2</sub> Sala et al. suggested could be emitted in the first year of activity alone.
     ![](img_output/CumulativePgCO2_vs_year.png)
     
-    **Figure 1.** Cumulative CO<sub>2</sub> emissions to the atmosphere through the indicated year, given a continuous pattern of trawling-related sediment disturbance beginning in year 0 according to the model described in Sala et al. (2021). Generated using the results in [adjCO2efflux_PgCO2_cumulative.csv](data/global_trawling/derived/output/adjCO2efflux_PgCO2_cumulative.csv).
+    **Figure 2.** Cumulative CO<sub>2</sub> emissions to the atmosphere through the indicated year, given a continuous pattern of trawling-related sediment disturbance beginning in year 0 according to the model described in Sala et al. (2021). Generated using the results in [adjCO2efflux_PgCO2_cumulative.csv](data/global_trawling/derived/output/adjCO2efflux_PgCO2_cumulative.csv).
