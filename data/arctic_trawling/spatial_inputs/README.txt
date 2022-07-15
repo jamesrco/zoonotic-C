@@ -1,10 +1,10 @@
 Files in this folder and subfolders were assembled and created by Monica Moritsch, mmoritsch@edf.org, from various data sources. They were uploaded on July 15, 2022.
 
-Some notes: 
+Some notes:
 
-* As there's still a moratorium on trawling until 2037, we don't have to use the footprints from before the 2030's, but we have the option.
-* Ice retreat values represent the year when sea ice concentration drops below 15% for at least 90 days. This 90-day window is assumed to align roughly with August - October, the historical months of minimum sea ice. All ice retreat projections are clipped to area where observed Aug-Oct mean sea ice concentration is < 15% in 2000 - 2021 to maintain consistency (e.g., making sure it's not predicting there is still ice where it's already gone today), with the assumption that anything with at least 90 days ice free now is already accessible to disturbance.
+* As there's still a moratorium on trawling until 2037, we don't have to use the footprints from before the 2030's, but we have the option.
+* Ice retreat values represent the year when sea ice concentration drops below 15% for at least 90 days. This 90-day window is assumed to align roughly with August - October, the historical months of minimum sea ice. All ice retreat projections are clipped to area where observed Aug-Oct mean sea ice concentration is < 15% in 2000 - 2021 to maintain consistency (e.g., making sure it's not predicting there is still ice where it's already gone today), with the assumption that anything with at least 90 days ice free now is already accessible to disturbance.
 * There are three ice melt scenarios to account for uncertainty: mean, aggressive (16 years faster), and conservative (16 years slower). Take the years with a grain of salt. Even if the model uncertainty were minimal, there would still be +/-5 years of error due to variability in natural climate cycles.
 * The ice retreat all area folder is what we can use as footprints for deep sea mining.
-* The ice retreat trawlable area is all area that could be accessible to trawling (depth <= 2000m) 
-* The demersal biomass percentiles are scaled from 1 (low) to 100 (high) based on ice-free trawlable area in a given decade. We can decide what percentile we want to use as a cutoff and further restrict our area of predicted trawling accordingly. I don't know how much work it is on your end or how this would explode our scenarios, but we could choose multiple cutoffs as different fishing intensity cutoffs (e.g., 90, 75, 50th percentiles). 
+* The ice retreat trawlable area is all area that could be accessible to trawling (depth <= 2000m).
+* The demersal biomass percentiles are scaled from 1 (low) to 100 (high) based on ice-free trawlable area in a given decade. We can decide what percentile we want to use as a cutoff and further restrict our area of predicted trawling accordingly. I don't know how much work it is on your end or how this would explode our scenarios, but we could choose multiple cutoffs as different fishing intensity cutoffs (e.g., 90, 75, 50th percentiles).
