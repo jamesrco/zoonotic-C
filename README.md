@@ -17,7 +17,7 @@ Calculations and figures to support Collins et al. review (in prep) of zoogeoche
 
 * The folder [data/arctic_trawling/catch_data](data/arctic_trawling/catch_data) contains a file with annual average catch data (2000-2016) for bottom-trawled species managed under the Northeast Atlantic Fisheries Commission and North Atlantic Salmon Conservation Organization Regional Fisheries Management Organizations.
 
-![](data/arctic_trawling/spatial_inputs/trawling_analysis_input_maps.pdf)
+![](data/arctic_trawling/spatial_inputs/trawling_analysis_input_maps.png)
     
     **Figure 1.** An overview of the various spatial datasets [@mmoritsch](https://github.com/mmoritsch) produced for this part of the project.
     
