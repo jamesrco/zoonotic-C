@@ -23,7 +23,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt install -y ssmtp
 
 SSMTP_ROOT=${SSMTP_ROOT:-jamesrco.aws@gmail.com}
 SSMTP_USER=${SSMTP_USER:-jamesrco.aws@gmail.com}
-SSMTP_PASS=${SSMTP_PASS:-user_password_here}
+SSMTP_PASS=${SSMTP_PASS:-***REMOVED***}
 SSMTP_SERVER=${SSMTP_SERVER:-smtp.gmail.com}
 SSMTP_PORT=${SSMTP_PORT:-587}
 SSMTP_HOSTNAME="$(hostname -f)"
