@@ -1,5 +1,7 @@
 # zoonotic-C
-Calculations and figures to support Collins et al. review (in prep) of zoogeochemical carbon fluxes in the ocean and an analysis of the possible climate impacts from new benthic trawling in the emerging Arctic. Code and data for refinement/constraint of the benthic trawling CO<sub>2</sub> emissions estimate presented in Sala et al. (2021), to be submitted as Matters Arising comment to *Nature*, has been moved to [a new repository](https://github.com/jamesrco/global-trawling-CO2).
+Calculations and figures to support Collins et al. review (in prep) of zoogeochemical carbon fluxes in the ocean and an analysis of the possible climate impacts from new benthic trawling in the emerging Arctic.
+
+**Note:** Code and data for refinement/constraint of the benthic trawling CO<sub>2</sub> emissions estimate presented in [Sala et al., 2021. Protecting the global ocean for biodiversity, food and climate. *Nature* **592**, 397–402](https://doi.org/10.1038/s41586-021-03371-z), to be submitted as Matters Arising comment to *Nature*, has been moved to [a new repository](https://github.com/jamesrco/global-trawling-CO2).
 
 ### Raw, unmodified data and files
 
