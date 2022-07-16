@@ -23,7 +23,7 @@ Calculations and figures to support Collins et al. review (in prep) of zoogeoche
 
 #### Shell scripts for AWS provisioning
 
-* The shell scripts in [aws_provisioning](aws_provisioning) are designed to be run in order on an AWS Ubuntu instance, to configure the remote virtual machine for running the various R scripts in this repository. They could be used to provision an Ubuntu instance to work generally with geospatial data in R. The fourth script ([04_ubuntu_mailnotify.sh](aws_provisioning/04_ubuntu_mailnotify.sh)) and accompanying text file in the "ssmtp" folder are not critical, but configure the remote machine to send simple email alerts (e.g., notification when a task is completed) to a supplied email address.
+* The shell scripts in [aws_provisioning](aws_provisioning) are designed to be run in order on an AWS Ubuntu instance, to configure the remote virtual machine for running the various R scripts in this repository. They could be used to provision an Ubuntu instance to work generally with geospatial data in R. The fourth script ([04_ubuntu_mailnotify.sh](aws_provisioning/04_ubuntu_mailnotify.sh)) and accompanying text file in the "ssmtp" folder are not critical, but configure the remote machine to send simple email alerts (e.g., notification when a task is completed) to a supplied email address. *Note that user (if not me) will have to supply an email address and password. For obvious reasons, I removed the password from the file before I committed it.* 
 
 #### Global benthic trawling reanalysis
 
