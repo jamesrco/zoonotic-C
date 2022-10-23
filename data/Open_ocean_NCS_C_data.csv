@@ -14,22 +14,22 @@ Fish,Mesopelagic species,Biomass,,Pg C,,,,0.125,,,,,,"Lam and Pauly, 2005",Y,
 Fish,Mesopelagic species,Biomass,,Pg C,,,,0.575,0.225,2,,,,"Proud et al., 2019",Y,
 Fish,Mesopelagic species,Biomass,,Pg C,,,,0.3,,,,,,"Anderson et al., 2019",Y,
 Fish,Mesopelagic species,Biomass,,Pg C,,,,0.5,,,,,,"Bar-On et al., 2018",N,
-Ocean biota,z - All ocean animals (upper limit),Biomass,,Pg C,,,,3,,,,,,"Makenzie and Lerman, 2006",N,Mass balance approach
-Ocean biota,z - All ocean animals (upper limit),Biomass,,Pg C,,,,2,,,,,,"Bar-On et al., 2018",N,Totals from different marine categories
-Ocean biota,z - All ocean animals (upper limit),Biomass,,Pg C,,,,1.5,1,2,,,,"Emerson and Hedges, 2008",N,1-2 Pg range from Table 11.1
+Ocean biota,z - All ocean biota (upper limit),Biomass,,Pg C,,,,3,,,,,,"Makenzie and Lerman, 2006",N,Mass balance approach
+Ocean biota,z - All ocean biota (upper limit),Biomass,,Pg C,,,,2,,,,,,"Bar-On et al., 2018",N,Totals from different marine categories
+Ocean biota,z - All ocean biota (upper limit),Biomass,,Pg C,,,,1.5,1,2,,,,"Emerson and Hedges, 2008",N,1-2 Pg range from Table 11.1
 Fish,All fish,Export,All known processes,Pg C yr-1,,,,1.5,0.3,2.7,,,,"Saba et al., 2021",N,
 Fish,All fish,Export,Fecal pellet production,Pg C yr-1,0.475,,,0.375,,,,,,"Bianchi et al., 2021",Y,
 Fish,Mesopelagic species,Export,Diel vertical migration,Pg C yr-1,,,,2.25,0.9,3.6,,,,"Boyd et al., 2019",N,
 Fish,Mesopelagic species,Export,Diel vertical migration,Pg C yr-1,,,,1.05,0.9,1.2,,,,"Aumont et al., 2018",N,
 Fish,Epipelagic species,Export,PIC export via fecal pellets,Pg C yr-1,,,,0.028571429,0.011428571,0.062857143,,,,Wilson et al. 2009,N,"Based on extrapolation of values presented in Fig. 1, with assumption that fish PIC is exported at same rate as other sinking PIC"
-Ocean biota,Vertebrates,Cycling within surface layer via respiration,,Pg C yr-1,,,,0.01,,,,,,del Giorgio and Duarte 2022,,Estimate for vertebrate respiration in open ocean
+Ocean biota,Vertebrates,Cycling within surface layer via respiration,,Pg C yr-1,,,,0.01,,,,,,del Giorgio and Duarte 2002,,Estimate for vertebrate respiration in open ocean
 Anthropogenic activity,Fishing - trawling,Flux from sediment - total,,Pg C yr-1,,,,0.400909091,0.158181818,,,,,"Sala et al., 2021",,Lo bound is Sala et al. estimate for activity at +9 years after trawling commences
-Anthropogenic activity,Fishing - trawling,Flux from sediment - China,,Pg C yr-1,,,,0.209590909,0.082695733,,,,,"Sala et al., 2021; Collins et al., 2022",,"Lo bound is Sala et al. estimate for activity at +9 years after trawling commences; EEZ calculations per Collins et al., 2022"
-Anthropogenic activity,Fishing - trawling,Flux from sediment - other than China,,Pg C yr-1,,,,0.191318182,0.075486085,,,,,"Sala et al., 2021; Collins et al., 2022",,"Lo bound is Sala et al. estimate for activity at +9 years after trawling commences; EEZ calculations per Collins et al., 2022"
+Anthropogenic activity,Fishing - trawling,Flux from sediment - Chinese EEZ,,Pg C yr-1,,,,0.209590909,0.082695733,,,,,"Sala et al., 2021; Collins et al., 2022",,"Lo bound is Sala et al. estimate for activity at +9 years after trawling commences; EEZ calculations per Collins et al., 2022"
+Anthropogenic activity,Fishing - trawling,Flux from sediment - all waters other than Chinese EEZ,,Pg C yr-1,,,,0.191318182,0.075486085,,,,,"Sala et al., 2021; Collins et al., 2022",,"Lo bound is Sala et al. estimate for activity at +9 years after trawling commences; EEZ calculations per Collins et al., 2022"
 Anthropogenic activity,Fishing - trawling,Flux from sediment,,Pg C yr-1,,,,0.06,,,,,,"Paradis et al., 2021",,Not really clear if value given in original paper was a timebound rate or not
 Anthropogenic activity,Fishing - trawling,Flux from ocean to atmosphere - total,,Pg C yr-1,,,,0.378003545,,,,,,"Collins et al., 2022",,"Mean annual flux for first 200 y of trawling, from circulation-adjusted estimates presented in Collins et al. 2022"
-Anthropogenic activity,Fishing - trawling,Flux from ocean to atmosphere - China,,Pg C yr-1,,,,0.208471064,,,,,,"Collins et al., 2022",,"Mean annual flux for first 200 y of trawling, from circulation-adjusted estimates presented in Collins et al. 2022"
-Anthropogenic activity,Fishing - trawling,Flux from ocean to atmosphere - other than China,,Pg C yr-1,,,,0.169532482,,,,,,"Collins et al., 2022",,"Mean annual flux for first 200 y of trawling, from circulation-adjusted estimates presented in Collins et al. 2022"
+Anthropogenic activity,Fishing - trawling,Flux from ocean to atmosphere - Chinese EEZ,,Pg C yr-1,,,,0.208471064,,,,,,"Collins et al., 2022",,"Mean annual flux for first 200 y of trawling, from circulation-adjusted estimates presented in Collins et al. 2022"
+Anthropogenic activity,Fishing - trawling,Flux from ocean to atmosphere - all waters other than Chinese EEZ,,Pg C yr-1,,,,0.169532482,,,,,,"Collins et al., 2022",,"Mean annual flux for first 200 y of trawling, from circulation-adjusted estimates presented in Collins et al. 2022"
 Anthropogenic activity,Fishing - large fish,Flux from ocean to atmosphere - total,,Pg C yr-1,,,,0.005563636,0.005363636,0.005763636,,,,"Mariani et al., 2020",Y,"Combined emissions from fuel burned during fishing and emissions from extracted biomass, 2014 numbers, for ""large fish"" as defined by authors (assumes 100% C_org to CO2)"
 Anthropogenic activity,Fishing - large fish,Flux from ocean to atmosphere - fossil fuel,,Pg C yr-1,,,,0.004527273,0.004327273,0.004727273,,,,"Mariani et al., 2020",,"Emissions from fossil fuels burned during fishing, for ""large fish"" as defined by authors, 2014 numbers"
 Anthropogenic activity,Fishing - large fish,Flux from ocean to atmosphere - extracted biomass,,Pg C yr-1,,,,0.001022727,0.000822727,0.001222727,,,,"Mariani et al., 2020",Y,"Emissions from extracted biomass, for ""large fish"" as defined by authors, 2014 numbers (assumes 100% C_org to CO2)"
