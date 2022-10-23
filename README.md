@@ -27,7 +27,7 @@ Calculations and figures to support Collins et al. review (in prep) of zoogeoche
 
 #### Zoogeochemical carbon fluxes
 
-* The script [OpenOceanNCSfigs.R](OpenOceanNCSfigs.R) was used to generate the figures appearing in Collins et al., *Zoogeochemical carbon fluxes and storage in the global ocean: Review and synthesis of current knowledge, scientific readiness of interventions for climate mitigation, and directions for future research*, a review in preparation for *Global Biogeochemical Cycles*
+* The script [OpenOceanNCSfigs.R](OpenOceanNCSfigs.R) was used to generate the figures appearing in Collins et al., "Zoogeochemical carbon fluxes and storage in the global ocean: Review and synthesis of current knowledge, scientific readiness of interventions for climate mitigation, and directions for future research," a review in preparation for the journal *Global Biogeochemical Cycles*
 
 #### Global benthic trawling reanalysis
 
@@ -37,7 +37,7 @@ Calculations and figures to support Collins et al. review (in prep) of zoogeoche
 
 #### Zoogeochemical carbon fluxes
 
-* The .csv file [Open_ocean_NCS_C_data.csv](data/Open_ocean_NCS_C_data.csv) contains the input data collected from the literature for the figures and tables in Collins et al., *Zoogeochemical carbon fluxes and storage in the global ocean: Review and synthesis of current knowledge, scientific readiness of interventions for climate mitigation, and directions for future research*, a review in preparation for *Global Biogeochemical Cycles*. The references from which the various flux and reservoir estimates were obtained are given in the file.
+* The .csv file [Open_ocean_NCS_C_data.csv](data/Open_ocean_NCS_C_data.csv) contains the input data collected from the literature for the figures and tables in Collins et al., "Zoogeochemical carbon fluxes and storage in the global ocean: Review and synthesis of current knowledge, scientific readiness of interventions for climate mitigation, and directions for future research," a review in preparation for the journal *Global Biogeochemical Cycles*. The references from which the various flux and reservoir estimates were obtained are given in the file.
 
 #### Global benthic trawling reanalysis
 
