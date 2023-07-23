@@ -1,9 +1,9 @@
 ﻿Overall category,Subcategory,Biomass or export,Export type,Units,Pre-whaling/pre-industrial fishing (Pg C or Pg C yr-1),Pre-whaling/pre-industrial fishing (Pg C or Pg C yr-1) (lo bound),Pre-whaling/pre-industrial fishing (Pg C or Pg C yr-1) (hi bound),Current quantity or height of whaling/fishing minimum (Pg C or Pg C yr-1),Current lo bound (Pg C or Pg C yr-1),Current hi bound (Pg C or Pg C yr-1),Possible w/full restoration (Pg C or Pg C yr-1),Possible w/full restoration (Pg C or Pg C yr-1) (lo bound),Possible w/full restoration (Pg C or Pg C yr-1) (hi bound),Reference,C:biomass conversion applied (for fish data),Notes
 Large marine mammals,Whales,Biomass,,Pg C,0.10301846,,,0.015992451,,,,,,"Pershing et al., 2010",,8 species of baleen whales
+Large marine mammals,Whales,Biomass,,Pg C,0.011,,,0.002,,,,,,"Pearson et al., 2023",,"Revision of estimates in Pershing et al., 2010"
 Large marine mammals,Whales,Export,Whale fall,Pg C yr-1,0.000192702,,,0.000028862,,,,,,"Pershing et al., 2010",,8 species of baleen whales
-Large marine mammals,Whales,Export,Whale fall,Pg C yr-1,0.00025,,,,,,,,,"Durfort et al., unpubl.",,5 species of Southern Hemisphere baleen whales
-Large marine mammals,Whales,Export,"Indirect Fe fertilization ""whale pump""",Pg C yr-1,0.0104,0.0036,0.0205,,,,,,,"Durfort et al., unpubl.",,5 species of Southern Hemisphere baleen whales
-Large marine mammals,Whales,Export,"Whale fall + indirect Fe fertilization ""whale pump""",Pg C yr-1,0.0106,0.0038,0.0208,0.002,,,0.0052,0.0022,0.0096,"Durfort et al., unpubl.",,"5 species of Southern Hemisphere baleen whales; in model, future projection was very much hampered by effects of climate change (would have been 2x the projected values without climate chanage effect)"
+Large marine mammals,Whales,Export,Whale fall,Pg C yr-1,0.0004,,,0.00006,,,0.00017,,,"Durfort et al., 2022",,5 species of Southern Hemisphere baleen whales; low/current value for 1972; estimate achievable by 2100 under RCP8.5
+Large marine mammals,Whales,Export,Whale fall,Pg C yr-1,0.00036,,,0.000062,,,,,,"Pearson et al., 2023",,"Revision of estimates in Pershing et al., 2010"
 Large marine mammals,Whales,Export,"Indirect Fe fertilization ""whale pump""",Pg C yr-1,,,,0.0004,,,,,,"Lavery et al., 2010",,Just Southern Ocean sperm whales
 Other marine mammals,Otters,Export,Kelp frond export via trophic cascade in kelp forests,Pg C yr-1,,,,0.011565,0.00013,0.023,,,,"Wilmers et al., 2012",N,"Mean of values for export scenarios (differing %s of biomass to export from 1%-50%); per Ortega et al. 2019, 44% NPP exported is not an unreasonable assumption"
 Fish,All fish,Biomass,,Pg C,0.8625,0.4125,1.3125,0.5875,0.282,0.893,,,,"Bianchi et al., 2021",Y,
@@ -22,6 +22,9 @@ Fish,All fish,Export,Fecal pellet production,Pg C yr-1,0.475,,,0.375,,,,,,"Bianc
 Fish,Mesopelagic species,Export,Diel vertical migration,Pg C yr-1,,,,2.25,0.9,3.6,,,,"Boyd et al., 2019",N,
 Fish,Mesopelagic species,Export,Diel vertical migration,Pg C yr-1,,,,1.05,0.9,1.2,,,,"Aumont et al., 2018",N,
 Fish,Epipelagic species,Export,PIC export via fecal pellets,Pg C yr-1,,,,0.028571429,0.011428571,0.062857143,,,,Wilson et al. 2009,N,"Based on extrapolation of values presented in Fig. 1, with assumption that fish PIC is exported at same rate as other sinking PIC"
+Fish,aaa - All fish and zooplankton,Export,All known processes,Pg C yr-1,,,,2,1.2,3,,,,Pinti et al. 2023,N,"Does not include an additional 3.1 Pg C yr-1 in ""carbon injection"""
+Fish,Mesopelagic species,Export,All known processes,Pg C yr-1,,,,0.3,0.06,0.8,,,,Pinti et al. 2023,N,"Does not include an additional potential contribution toward sequestration from ""carbon injection"""
+Fish,Epipelagic species,Export,All known processes,Pg C yr-1,,,,0.24,0.03,0.25,,,,Pinti et al. 2023,N,"Sum of Pinti et al. categories ""Forage fish"" + ""pelagic fish""; does not include an additional potential contribution toward sequestration from ""carbon injection"""
 Ocean biota,Vertebrates,Cycling within surface layer via respiration,,Pg C yr-1,,,,0.01,,,,,,del Giorgio and Duarte 2002,,Estimate for vertebrate respiration in open ocean
 Anthropogenic activity,Fishing - trawling,Flux from sediment - total,,Pg C yr-1,,,,0.400909091,0.158181818,,,,,"Sala et al., 2021",,Lo bound is Sala et al. estimate for activity at +9 years after trawling commences
 Anthropogenic activity,Fishing - trawling,Flux from sediment - Chinese EEZ,,Pg C yr-1,,,,0.209590909,0.082695733,,,,,"Sala et al., 2021; Collins et al., 2022",,"Lo bound is Sala et al. estimate for activity at +9 years after trawling commences; EEZ calculations per Collins et al., 2022"
@@ -36,10 +39,11 @@ Anthropogenic activity,Fishing - large fish,Flux from ocean to atmosphere - extr
 Anthropogenic activity,Fishing - total,Flux from ocean to atmosphere - fossil fuel,,Pg C yr-1,,,,0.048818182,,,,,,"Parker et al., 2018",,"Emissions from fossil fuels burned during fishing, all fisheries, 2011 numbers"
 Anthropogenic activity,Fishing - total,Flux from ocean to atmosphere - fossil fuel,,Pg C yr-1,,,,0.056618182,,,,,,"Greer et al., 2019",,"Emissions from fossil fuels burned during fishing, all fisheries, 2016 numbers"
 Anthropogenic activity,Fishing - total,Flux from ocean to atmosphere - extracted biomass,,Pg C yr-1,,,,0.013254,0.0106032,0.0159048,,,,"Greer et al., 2019; Mariani et al., 2020",Y,"Emissions from extracted biomass, for all fisheries, 2016: Landings data per Greer et al. (sum of reported + unreported); conversions for C:biomass and % bones per Mariani et al. (assumes 100% C_org to CO2)"
-Flux,aa - Carbon cycle fluxes,Net C export from surface ocean,,Pg C yr-1,,,,,8,15,,,,"zz - Sabine and Feely, 2007; Hauck et al. 2020",,
+Flux,aa - Carbon cycle fluxes,Net C export from surface ocean,,Pg C yr-1,,,,10.2,9.7,10.7,,,,"zz - Nowicki et al., 2022",,
+Flux,aa - Carbon cycle fluxes,Net C export from surface ocean,,Pg C yr-1,,,,9.1,8.9,9.3,,,,"zz - Devries and Weber, 2017",,
 Bulk C storage reservoirs,Ocean DIC,,,Pg C,,,,38000,,,,,,"Emerson and Hedges, 2008",,
-Bulk C storage reservoirs,Ocean DOC,,,Pg C,,,,700,,,,,,"Emerson and Hedges, 2008",,
-Bulk C storage reservoirs,Ocean DIC,Anthro DIC,,Pg C,,,,140,,,,,,"Gruber et al., 2019",,
+Bulk C storage reservoirs,Ocean DOC,,,Pg C,,,,662,,,,,,"Hansell et al., 2009",,
+Bulk C storage reservoirs,Ocean DIC,Anthro DIC,,Pg C,,,,160,,,,,,"Gruber et al., 2019",,
 Bulk C storage reservoirs,Ocean sediment C_org - top 1 m,1-5 cm,,Pg C,,,,113,,,,,,"Atwood et al., 2020",,
 Bulk C storage reservoirs,Ocean sediment C_org - top 1 m,5-30 cm,,Pg C,,,,578,,,,,,"Atwood et al., 2020",,
 Bulk C storage reservoirs,Ocean sediment C_org - top 1 m,30-100 cm,,Pg C,,,,1631,,,,,,"Atwood et al., 2020",,

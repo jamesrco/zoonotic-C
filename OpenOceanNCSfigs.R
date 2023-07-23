@@ -42,12 +42,12 @@ gap.plot(Biomass.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg
 rectBounds <- data.frame(c(min(unlist(c(Biomass.today[Biomass.today$Subcategory=="All fish",9:10])), na.rm = T),
                 min(unlist(c(Biomass.today[Biomass.today$Subcategory=="Mesopelagic species",9:10])), na.rm = T),
                 min(unlist(c(Biomass.today[Biomass.today$Subcategory=="Whales",9:10])), na.rm = T),
-                min(unlist(c(Biomass.today[Biomass.today$Subcategory=="z - All ocean animals (upper limit)",9:10])), na.rm = T)),
+                min(unlist(c(Biomass.today[Biomass.today$Subcategory=="z - All ocean biota (upper limit)",9:10])), na.rm = T)),
                 c(sort(unique(as.numeric(yrange.Biomass)))-.25),
                 c(max(unlist(c(Biomass.today[Biomass.today$Subcategory=="All fish",c(9,11)])), na.rm = T),
                   max(unlist(c(Biomass.today[Biomass.today$Subcategory=="Mesopelagic species",c(9,11)])), na.rm = T),
                   max(unlist(c(Biomass.today[Biomass.today$Subcategory=="Whales",c(9,11)])), na.rm = T),
-                  max(unlist(c(Biomass.today[Biomass.today$Subcategory=="z - All ocean animals (upper limit)",c(9,11)])), na.rm = T)),
+                  max(unlist(c(Biomass.today[Biomass.today$Subcategory=="z - All ocean biota (upper limit)",c(9,11)])), na.rm = T)),
                 c(sort(unique(as.numeric(yrange.Biomass)))+.25))
 
 gap.plot(rect(rectBounds[,1],rectBounds[,2],rectBounds[,3],rectBounds[,4],col="lightgrey",lty = 0), add = T, gap=c(3.25,23.75), gap.axis="x",ylim=c(0.5,4.5),
@@ -84,7 +84,7 @@ xrange.Export <- as.factor(Export.today$Subcategory)
 
 # current values 
 
-plot(as.numeric(xrange.Export), Export.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1., type = "p", col = 0, xlim=c(0.5,6.5), ylim=c(250,0.000001), log="y", xlab = "Flux", ylab = "Export from surface ocean (Pg C yr-1)", yaxt = "n", yaxs="i")
+plot(as.numeric(xrange.Export), Export.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1., type = "p", col = 0, xlim=c(0.5,7.5), ylim=c(250,0.000001), log="y", xlab = "Flux", ylab = "Export from surface ocean (Pg C yr-1)", yaxt = "n", yaxs="i")
 axty <- c(axTicks(2),1e-06)
 myTickNumbers <- as.numeric(sapply(log10(axty), format, scientifc = FALSE))
 myTickLabels <- sapply(myTickNumbers,function(i)
@@ -101,6 +101,7 @@ rectBounds.Export <- data.frame(c(sort(unique(as.numeric(xrange.Export)))-.35),
                        rep(0, length(levels(xrange.Export))),
                        c(sort(unique(as.numeric(xrange.Export)))-.05),
                        c(max(unlist(c(Export.today[Export.today$Subcategory=="aa - Carbon cycle fluxes",c(9,11)])), na.rm = T),
+                         max(unlist(c(Export.today[Export.today$Subcategory=="aaa - All fish and zooplankton",c(9,11)])), na.rm = T),
                          max(unlist(c(Export.today[Export.today$Subcategory=="All fish",c(9,11)])), na.rm = T),
                          max(unlist(c(Export.today[Export.today$Subcategory=="Epipelagic species",c(9,11)])), na.rm = T),
                          max(unlist(c(Export.today[Export.today$Subcategory=="Mesopelagic species",c(9,11)])), na.rm = T),
@@ -115,33 +116,28 @@ rectBounds.Export.bestcase <- data.frame(c(sort(unique(as.numeric(xrange.Export)
                                 rep(0, length(levels(xrange.Export))),
                                 c(sort(unique(as.numeric(xrange.Export)))+.35),
                                 c(max(unlist(c(Export.today[Export.today$Subcategory=="aa - Carbon cycle fluxes",c(6,8)])), na.rm = T),
+                                  max(unlist(c(Export.today[Export.today$Subcategory=="aaa - All fish and zooplankton",c(6,8)])), na.rm = T),
                                   max(unlist(c(Export.today[Export.today$Subcategory=="All fish",c(6,8)])), na.rm = T),
                                   max(unlist(c(Export.today[Export.today$Subcategory=="Epipelagic species",c(12,14)])), na.rm = T),
                                   max(unlist(c(Export.today[Export.today$Subcategory=="Mesopelagic species",c(12,14)])), na.rm = T),
                                   max(unlist(c(Export.today[Export.today$Subcategory=="Otters",c(6,8)])), na.rm = T),
-                                  max(unlist(c(Export.today[Export.today$Subcategory=="Whales",c(12,14)])), na.rm = T)))
+                                  max(unlist(c(Export.today[Export.today$Subcategory=="Whales",c(6,8)])), na.rm = T)))
 
 rect(rectBounds.Export.bestcase[,1],rep(0.0000001, length(levels(xrange.Export))),rectBounds.Export.bestcase[,3],rectBounds.Export.bestcase[,4],col="lightgrey",lty = 0)
 
 # for whales, separate rectangles for the with and without indirect fertilization component 
 
-rect(rectBounds.Export[6,1],
+rect(rectBounds.Export[7,1],
      max(unlist(c(Export.today[Export.today$Subcategory=="Whales" & Export.today$Export.type=="Whale fall",c(9,11)])), na.rm = T),
-     rectBounds.Export[6,3],
+     rectBounds.Export[7,3],
      max(unlist(c(Export.today[Export.today$Subcategory=="Whales" & Export.today$Export.type!="Whale fall",c(9,11)])), na.rm = T),
-     col="darkgrey",lty = 0)
-
-rect(rectBounds.Export.bestcase[6,1],
-     min(unlist(c(Export.today[Export.today$Subcategory=="Whales" & Export.today$Export.type=="Whale fall",c(6,8)])), na.rm = T),
-     rectBounds.Export.bestcase[6,3],
-     max(unlist(c(Export.today[Export.today$Subcategory=="Whales" & Export.today$Export.type!="Whale fall",c(6,8)])), na.rm = T),
      col="darkgrey",lty = 0)
 
 # for otters, separate rectangles for the higher-end export estimates 
 
-rect(rectBounds.Export[5,1],
+rect(rectBounds.Export[6,1],
      min(unlist(c(Export.today[Export.today$Subcategory=="Otters",c(9:11)])), na.rm = T),
-     rectBounds.Export[5,3],
+     rectBounds.Export[6,3],
      max(unlist(c(Export.today[Export.today$Subcategory=="Otters",c(9:11)])), na.rm = T),
      col="darkgrey",lty = 0)
 
@@ -151,9 +147,9 @@ segments(as.numeric(xrange.Export)-.35,
          Export.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1.,
          x1 = as.numeric(xrange.Export)-.05)
 
-segments(as.numeric(xrange.Export)[c(1,4,8)]+.05,
-         Export.today$Pre.whaling.pre.industrial.fishing..Pg.C.or.Pg.C.yr.1.[c(1,4,8)],
-         x1 = as.numeric(xrange.Export)[c(1,4,8)]+.35)
+segments(as.numeric(xrange.Export)[c(1:3,7)]+.05,
+         Export.today$Pre.whaling.pre.industrial.fishing..Pg.C.or.Pg.C.yr.1.[c(1:3,7)],
+         x1 = as.numeric(xrange.Export)[c(1:3,7)]+.35)
 
 # superimpose text refs
 
@@ -161,19 +157,13 @@ text(as.numeric(xrange.Export)-0.2,
      Export.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1.,
      Export.today$refNum, cex = 0.6)
 
-text(as.numeric(xrange.Export)[c(1,4,8)]+0.2,
-     Export.today$Pre.whaling.pre.industrial.fishing..Pg.C.or.Pg.C.yr.1.[c(1,4,8)],
-     Export.today$refNum[c(1,4,8)], cex = 0.6)
-
-# separate text for the overall export range estimates
-
-text(1-0.38,
-     10^-2.5,
-     paste(max(Export.today$refNum),", ",max(Export.today$refNum)+1, sep = ""), cex = 0.6, srt = 90)
+text(as.numeric(xrange.Export)[c(1:3,7)]+0.2,
+     Export.today$Pre.whaling.pre.industrial.fishing..Pg.C.or.Pg.C.yr.1.[c(1:3,7)],
+     Export.today$refNum[c(1:3,7)], cex = 0.6)
 
 # non-log plot
 
-plot(as.numeric(xrange.Export), Export.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1., type = "p", col = 0, xlim=c(0.5,6.5), ylim=c(17,0),xlab = "Flux", ylab = "Export from surface ocean (Pg C yr-1)", yaxs="i")
+plot(as.numeric(xrange.Export), Export.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1., type = "p", col = 0, xlim=c(0.5,7.5), ylim=c(12,0),xlab = "Flux", ylab = "Export from surface ocean (Pg C yr-1)", yaxs="i")
 
 # range rectangles
 
@@ -181,6 +171,7 @@ rectBounds.Export <- data.frame(c(sort(unique(as.numeric(xrange.Export)))-.35),
                                 rep(0, length(levels(xrange.Export))),
                                 c(sort(unique(as.numeric(xrange.Export)))-.05),
                                 c(max(unlist(c(Export.today[Export.today$Subcategory=="aa - Carbon cycle fluxes",c(9,11)])), na.rm = T),
+                                  max(unlist(c(Export.today[Export.today$Subcategory=="aaa - All fish and zooplankton",c(9,11)])), na.rm = T),
                                   max(unlist(c(Export.today[Export.today$Subcategory=="All fish",c(9,11)])), na.rm = T),
                                   max(unlist(c(Export.today[Export.today$Subcategory=="Epipelagic species",c(9,11)])), na.rm = T),
                                   max(unlist(c(Export.today[Export.today$Subcategory=="Mesopelagic species",c(9,11)])), na.rm = T),
@@ -193,33 +184,28 @@ rectBounds.Export.bestcase <- data.frame(c(sort(unique(as.numeric(xrange.Export)
                                          rep(0, length(levels(xrange.Export))),
                                          c(sort(unique(as.numeric(xrange.Export)))+.35),
                                          c(max(unlist(c(Export.today[Export.today$Subcategory=="aa - Carbon cycle fluxes",c(6,8)])), na.rm = T),
+                                           max(unlist(c(Export.today[Export.today$Subcategory=="aaa - All fish and zooplankton",c(6,8)])), na.rm = T),
                                            max(unlist(c(Export.today[Export.today$Subcategory=="All fish",c(6,8)])), na.rm = T),
                                            max(unlist(c(Export.today[Export.today$Subcategory=="Epipelagic species",c(12,14)])), na.rm = T),
                                            max(unlist(c(Export.today[Export.today$Subcategory=="Mesopelagic species",c(12,14)])), na.rm = T),
                                            max(unlist(c(Export.today[Export.today$Subcategory=="Otters",c(6,8)])), na.rm = T),
-                                           max(unlist(c(Export.today[Export.today$Subcategory=="Whales",c(12,14)])), na.rm = T)))
+                                           max(unlist(c(Export.today[Export.today$Subcategory=="Whales",c(6,8)])), na.rm = T)))
 
 rect(rectBounds.Export.bestcase[,1],rep(0, length(levels(xrange.Export))),rectBounds.Export.bestcase[,3],rectBounds.Export.bestcase[,4],col="lightgrey",lty = 0)
 
 # for whales, separate rectangles for the with and without indirect fertilization component 
 
-rect(rectBounds.Export[6,1],
+rect(rectBounds.Export[7,1],
      max(unlist(c(Export.today[Export.today$Subcategory=="Whales" & Export.today$Export.type=="Whale fall",c(9,11)])), na.rm = T),
-     rectBounds.Export[6,3],
+     rectBounds.Export[7,3],
      max(unlist(c(Export.today[Export.today$Subcategory=="Whales" & Export.today$Export.type!="Whale fall",c(9,11)])), na.rm = T),
-     col="darkgrey",lty = 0)
-
-rect(rectBounds.Export.bestcase[6,1],
-     min(unlist(c(Export.today[Export.today$Subcategory=="Whales" & Export.today$Export.type=="Whale fall",c(6,8)])), na.rm = T),
-     rectBounds.Export.bestcase[6,3],
-     max(unlist(c(Export.today[Export.today$Subcategory=="Whales" & Export.today$Export.type!="Whale fall",c(6,8)])), na.rm = T),
      col="darkgrey",lty = 0)
 
 # for otters, separate rectangles for the higher-end export estimates 
 
-rect(rectBounds.Export[5,1],
+rect(rectBounds.Export[6,1],
      min(unlist(c(Export.today[Export.today$Subcategory=="Otters",c(9:11)])), na.rm = T),
-     rectBounds.Export[5,3],
+     rectBounds.Export[6,3],
      max(unlist(c(Export.today[Export.today$Subcategory=="Otters",c(9:11)])), na.rm = T),
      col="darkgrey",lty = 0)
 
@@ -229,9 +215,9 @@ segments(as.numeric(xrange.Export)-.35,
          Export.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1.,
          x1 = as.numeric(xrange.Export)-.05)
 
-segments(as.numeric(xrange.Export)[c(1,4,8)]+.05,
-         Export.today$Pre.whaling.pre.industrial.fishing..Pg.C.or.Pg.C.yr.1.[c(1,4,8)],
-         x1 = as.numeric(xrange.Export)[c(1,4,8)]+.35)
+segments(as.numeric(xrange.Export)[c(1:3,7)]+.05,
+         Export.today$Pre.whaling.pre.industrial.fishing..Pg.C.or.Pg.C.yr.1.[c(1:3,7)],
+         x1 = as.numeric(xrange.Export)[c(1:3,7)]+.35)
 
 # superimpose text refs
 
@@ -239,15 +225,9 @@ text(as.numeric(xrange.Export)-0.2,
      Export.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1.,
      Export.today$refNum, cex = 0.6)
 
-text(as.numeric(xrange.Export)[c(1,4,8)]+0.2,
-     Export.today$Pre.whaling.pre.industrial.fishing..Pg.C.or.Pg.C.yr.1.[c(1,4,8)],
-     Export.today$refNum[c(1,4,8)], cex = 0.6)
-
-# separate text for the overall export range estimates
-
-text(1-0.38,
-     0.5*max(Export.today[Export.today$Subcategory=="aa - Carbon cycle fluxes",c("Current.hi.bound..Pg.C.or.Pg.C.yr.1.")]),
-     paste(max(Export.today$refNum),", ",max(Export.today$refNum)+1, sep = ""), cex = 0.6, srt = 90)
+text(as.numeric(xrange.Export)[c(1:3,7)]+0.2,
+     Export.today$Pre.whaling.pre.industrial.fishing..Pg.C.or.Pg.C.yr.1.[c(1:3,7)],
+     Export.today$refNum[c(1:3,7)], cex = 0.6)
 
 # plot of fishing emissions 
 
