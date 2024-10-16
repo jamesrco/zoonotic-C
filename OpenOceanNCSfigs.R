@@ -1,7 +1,7 @@
 # OpenOceanNCSfigs.R
 # Created November 2021 to generate figures for EDF-BEF NCS open ocean state of science report
-# Revised fall 2022 to generate figures for review on zoonotic carbon fluxes, to
-# be submitted to Global Biogeochemical Cycles
+# Revised fall 2022 to generate figures for review on zoonotic carbon fluxes, for the journal
+# Global Biogeochemical Cycles
 # Author: Jamie Collins, jcollins@edf.org
 
 library(plotrix)

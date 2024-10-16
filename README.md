@@ -1,7 +1,7 @@
 # zoonotic-C
-Calculations and figures to support Collins et al. "zoogeochemical carbon" review in preparation for *Global Biogeochemical Cycles*, and a separate analysis of the possible climate impacts from new benthic trawling in the emerging Arctic, with EDF co-authors.
+Calculations and figures to support Collins et al. "zoogeochemical carbon" review for *Global Biogeochemical Cycles*, currently in revision, and a separate analysis of the possible climate impacts from new benthic trawling in the emerging Arctic, with EDF co-authors.
 
-**Note:** Code and data for refinement/constraint of the benthic trawling CO<sub>2</sub> emissions estimate presented in [Sala et al., 2021. Protecting the global ocean for biodiversity, food and climate. *Nature* **592**, 397–402](https://doi.org/10.1038/s41586-021-03371-z), in preprint [on EarthArXiv] (https://doi.org/10.31223/X5XD2P) and to be submitted to *Scientific Reports*, has been moved to [a new repository](https://github.com/jamesrco/global-trawling-CO2).
+**Note:** Code and data for refinement/constraint of the benthic trawling CO<sub>2</sub> emissions estimate presented in [Sala et al., 2021. Protecting the global ocean for biodiversity, food and climate. *Nature* **592**, 397–402](https://doi.org/10.1038/s41586-021-03371-z), in preprint [on EarthArXiv] (https://doi.org/10.31223/X5XD2P) and in review elsewhere, has been moved to [a new repository](https://github.com/jamesrco/global-trawling-CO2).
 
 ### Raw, unmodified data and files
 
@@ -27,7 +27,7 @@ Calculations and figures to support Collins et al. "zoogeochemical carbon" revie
 
 #### Zoogeochemical carbon fluxes
 
-* The script [OpenOceanNCSfigs.R](OpenOceanNCSfigs.R) was used to generate the figures appearing in Collins et al., "Storage and fluxes of zoogeochemical carbon in the global ocean: Review and synthesis of current knowledge, directions for future research, and scientific readiness of interventions for climate mitigation," a review in preparation for the journal *Global Biogeochemical Cycles*
+* The script [OpenOceanNCSfigs.R](OpenOceanNCSfigs.R) was used to generate the figures appearing in Collins et al., "The biogeochemistry of natural climate solutions based on fish, fisheries, and marine mammals: A review of current evidence, research needs, and critical assessment of readiness," a review for the journal *Global Biogeochemical Cycles*
 
 #### Global benthic trawling reanalysis
 
@@ -37,7 +37,7 @@ Calculations and figures to support Collins et al. "zoogeochemical carbon" revie
 
 #### "Zoogeochemical"" carbon fluxes
 
-* The .csv file [Open_ocean_NCS_C_data.csv](data/Open_ocean_NCS_C_data.csv) contains the input data collected from the literature for the figures and tables in the Collins et al. "zoogeochemical carbon" review in preparation for the journal *Global Biogeochemical Cycles*. The references from which the various flux and reservoir estimates were obtained are given in the file.
+* The .csv file [Open_ocean_NCS_C_data.csv](data/Open_ocean_NCS_C_data.csv) contains the input data collected from the literature for the figures and tables in the Collins et al. "zoogeochemical carbon" review for *Global Biogeochemical Cycles*. The references from which the various flux and reservoir estimates were obtained are given in the file.
 
 #### Global benthic trawling reanalysis
 
