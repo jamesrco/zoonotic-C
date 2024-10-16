@@ -37,7 +37,7 @@ Calculations and figures to support Collins et al. "zoogeochemical carbon" revie
 
 #### "Zoogeochemical"" carbon fluxes
 
-* The .csv file [Open_ocean_NCS_C_data.csv](data/Open_ocean_NCS_C_data.csv) contains the input data collected from the literature for the figures and tables in the Collins et al. "zoogeochemical carbon" review for *Global Biogeochemical Cycles*. The references from which the various flux and reservoir estimates were obtained are given in the file.
+* The .csv file [Open_ocean_NCS_C_data.csv](data/Open_ocean_NCS_C_data.csv) contains the input data collected from the literature for the figures in the Collins et al. review for *Global Biogeochemical Cycles*. The references from which the various flux and reservoir estimates were obtained are given in the file. The data in the .csv file, as well as several dozen additional values from the literature, are included in an extensive table in the manuscript. 
 
 #### Global benthic trawling reanalysis
 
