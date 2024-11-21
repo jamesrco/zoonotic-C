@@ -1,0 +1,12 @@
+Nov 20, 2024
+
+Handing over the files to Gael
+
+These are the files and R code I developed to evaluate trawling carbon remineralization from the area of melting ice. I had partially written up some methods in a word document and made some powerpoint schematics. 
+I also have a short presentation with preliminary results. The figures will likely change, but in the event that they stay the same, feel free to use them.
+
+The crux of my approach was to create a loop of carbon stock disturbance (and fraction of subsequent remineralization), carbon stock resettling after disturbance, and carbon replenishment from natural sedimentation.
+I pulled equations and conservative rates from the Sala update paper but they could probably be updated still. There was a lot of debate about the value of k spanning orders of magnitude.
+
+For initial carbon stock, I combined a map from Atwood with another map to fill the hole at the pole. They don't blend well. I also attempted some jackknifing with the carbon core dataset that Alex Waller had pulled together, but more information on environmental conditions was needed to make a proper carbon stocks model.
+Trawling activity was predicted by using the Fauchauld et al. 2021 model, which predicted activity based on fish biomass correlations with temperature and ice cover. I swapped out the ice cover and SST layers over time.
