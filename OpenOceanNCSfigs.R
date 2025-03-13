@@ -25,13 +25,22 @@ Biomass.today <- rawCdat[rawCdat$Biomass.or.export=="Biomass" & !is.na(rawCdat$C
 
 yrange.Biomass <- as.factor(Biomass.today$Subcategory)
 
+yrange.Biomass <- factor(yrange.Biomass, levels = c("Whales",
+                                    "All marine mammals",
+                                    "Mesopelagic species",
+                                    "All fish",
+                                    "All marine animals",
+                                    "Zooplankton",
+                                    "Phytoplankton",
+                                    "z - All ocean biota (upper limit)"))
+
 # make a range plot with the biomass data, by subcategory; using plotrix since we need an axis break
 
 gap.plot(Biomass.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1.,
          as.numeric(yrange.Biomass),
          pch=0, col = 0,
-         gap=c(3.25,23.75), gap.axis="x",
-         ylim=c(0.5,7.5),
+         gap=c(6.25,23.75), gap.axis="x",
+         ylim=c(0.5,8.5),
          ylab = "Category",
          xlab = "Biomass (Pg C)",
      xlim=c(min(Biomass.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1.),
@@ -41,6 +50,7 @@ gap.plot(Biomass.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg
 # create range rectangles using min/max bounds from uncertainties or values
 
 rectBounds <- data.frame(c(min(unlist(c(Biomass.today[Biomass.today$Subcategory=="Whales",9:10])), na.rm = T),
+                min(unlist(c(Biomass.today[Biomass.today$Subcategory=="All marine mammals",9:10])), na.rm = T),
                 min(unlist(c(Biomass.today[Biomass.today$Subcategory=="Mesopelagic species",9:10])), na.rm = T),
                 min(unlist(c(Biomass.today[Biomass.today$Subcategory=="All fish",9:10])), na.rm = T),
                 min(unlist(c(Biomass.today[Biomass.today$Subcategory=="All marine animals",9:10])), na.rm = T),
@@ -48,18 +58,22 @@ rectBounds <- data.frame(c(min(unlist(c(Biomass.today[Biomass.today$Subcategory=
                 min(unlist(c(Biomass.today[Biomass.today$Subcategory=="Phytoplankton",9:10])), na.rm = T),
                 min(unlist(c(Biomass.today[Biomass.today$Subcategory=="z - All ocean biota (upper limit)",9:10])), na.rm = T)),
                 c(sort(unique(as.numeric(yrange.Biomass)))-.25),
-                c(max(unlist(c(Biomass.today[Biomass.today$Subcategory=="All fish",c(9,11)])), na.rm = T),
-                  max(unlist(c(Biomass.today[Biomass.today$Subcategory=="Mesopelagic species",c(9,11)])), na.rm = T),
-                  max(unlist(c(Biomass.today[Biomass.today$Subcategory=="Whales",c(9,11)])), na.rm = T),
-                  max(unlist(c(Biomass.today[Biomass.today$Subcategory=="z - All ocean biota (upper limit)",c(9,11)])), na.rm = T)),
+                c(max(unlist(c(Biomass.today[Biomass.today$Subcategory=="Whales",9:10])), na.rm = T),
+                  max(unlist(c(Biomass.today[Biomass.today$Subcategory=="All marine mammals",9:10])), na.rm = T),
+                  max(unlist(c(Biomass.today[Biomass.today$Subcategory=="Mesopelagic species",9:10])), na.rm = T),
+                  max(unlist(c(Biomass.today[Biomass.today$Subcategory=="All fish",9:10])), na.rm = T),
+                  max(unlist(c(Biomass.today[Biomass.today$Subcategory=="All marine animals",9:10])), na.rm = T),
+                  max(unlist(c(Biomass.today[Biomass.today$Subcategory=="Zooplankton",9:10])), na.rm = T),
+                  max(unlist(c(Biomass.today[Biomass.today$Subcategory=="Phytoplankton",9:10])), na.rm = T),
+                  max(unlist(c(Biomass.today[Biomass.today$Subcategory=="z - All ocean biota (upper limit)",9:10])), na.rm = T)),
                 c(sort(unique(as.numeric(yrange.Biomass)))+.25))
 
-gap.plot(rect(rectBounds[,1],rectBounds[,2],rectBounds[,3],rectBounds[,4],col="lightgrey",lty = 0), add = T, gap=c(3.25,23.75), gap.axis="x",ylim=c(0.5,4.5),
+gap.plot(rect(rectBounds[,1],rectBounds[,2],rectBounds[,3],rectBounds[,4],col="lightgrey",lty = 0), add = T, gap=c(6.25,23.75), gap.axis="x",ylim=c(0.5,8.5),
          pch = 0, col = 0,
          xlim=c(min(Biomass.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1.),
                 max(c(Biomass.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1.,Biomass.today$Current.hi.bound..Pg.C.or.Pg.C.yr.1.), na.rm = T)))
 
-axis.break(axis = 1, breakpos = 3.25) # add the axis break symbol
+axis.break(axis = 1, breakpos = 6.25) # add the axis break symbol
 
 # append some vertical lines that show where the reference values are
 
