@@ -6,6 +6,7 @@
 
 library(plotrix)
 library(RColorBrewer)
+library(dplyr)
 
 # read in biomass, export data
 
@@ -18,7 +19,7 @@ rawCdat$refNum <- as.numeric(as.factor(rawCdat$Reference))
 
 # subsetting
 
-Biomass.today <- rawCdat[rawCdat$Biomass.or.export=="Biomass",]
+Biomass.today <- rawCdat[rawCdat$Biomass.or.export=="Biomass" & !is.na(rawCdat$Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1.),]
 
 # factor variable by subcategory, for the range plot
 
@@ -30,7 +31,7 @@ gap.plot(Biomass.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg
          as.numeric(yrange.Biomass),
          pch=0, col = 0,
          gap=c(3.25,23.75), gap.axis="x",
-         ylim=c(0.5,4.5),
+         ylim=c(0.5,7.5),
          ylab = "Category",
          xlab = "Biomass (Pg C)",
      xlim=c(min(Biomass.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1.),
@@ -39,9 +40,12 @@ gap.plot(Biomass.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg
 
 # create range rectangles using min/max bounds from uncertainties or values
 
-rectBounds <- data.frame(c(min(unlist(c(Biomass.today[Biomass.today$Subcategory=="All fish",9:10])), na.rm = T),
+rectBounds <- data.frame(c(min(unlist(c(Biomass.today[Biomass.today$Subcategory=="Whales",9:10])), na.rm = T),
                 min(unlist(c(Biomass.today[Biomass.today$Subcategory=="Mesopelagic species",9:10])), na.rm = T),
-                min(unlist(c(Biomass.today[Biomass.today$Subcategory=="Whales",9:10])), na.rm = T),
+                min(unlist(c(Biomass.today[Biomass.today$Subcategory=="All fish",9:10])), na.rm = T),
+                min(unlist(c(Biomass.today[Biomass.today$Subcategory=="All marine animals",9:10])), na.rm = T),
+                min(unlist(c(Biomass.today[Biomass.today$Subcategory=="Zooplankton",9:10])), na.rm = T),
+                min(unlist(c(Biomass.today[Biomass.today$Subcategory=="Phytoplankton",9:10])), na.rm = T),
                 min(unlist(c(Biomass.today[Biomass.today$Subcategory=="z - All ocean biota (upper limit)",9:10])), na.rm = T)),
                 c(sort(unique(as.numeric(yrange.Biomass)))-.25),
                 c(max(unlist(c(Biomass.today[Biomass.today$Subcategory=="All fish",c(9,11)])), na.rm = T),

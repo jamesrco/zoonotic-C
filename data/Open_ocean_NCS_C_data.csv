@@ -18,6 +18,8 @@ Fish,Mesopelagic species,Biomass,,Pg C,,,,0.3,,,,,,"Anderson et al., 2019",Y,
 Fish,Mesopelagic species,Biomass,,Pg C,,,,0.5,,,,,,"Bar-On et al., 2018",N,
 Ocean biota,z - All ocean biota (upper limit),Biomass,,Pg C,,,,3,,,,,,"Mackenzie and Lerman, 2006",N,Mass balance approach
 Ocean biota,All marine animals,Biomass,,Pg C,,,,1.907,,,,,,"Bar-On et al., 2018",N,"Sum of marine arthropods, fish, molluscs from Table S23 and 0.007 estimate from text for marine mammals"
+Ocean biota,All marine mammals,Biomass,,Pg C,,,,0.0113,,,,,,"Hatton et al., 2021",N,
+Ocean biota,All marine mammals,Biomass,,Pg C,,,,0.0065,,,,,,"Greenspoon et al., 2023",N,
 Ocean biota,z - All ocean biota (upper limit),Biomass,,Pg C,,,,6,,,,,,"Bar-On et al., 2018",N,Overall number reported for marine biomass
 Ocean biota,z - All ocean biota (upper limit),Biomass,,Pg C,,,,1.5,1,2,,,,"Emerson and Hedges, 2008",N,1-2 Pg range from Table 11.1
 Ocean biota,Phytoplankton,Biomass,,Pg C,,,,1,,,,,,"Bar-On et al., 2018",N,"Sum of picoplankton, diatoms, phaeocystis from p. 53 of Supplementary Information"
