@@ -365,23 +365,23 @@ text(1-0.2,
 # plot of overall ocean C storage
 
 # subset to relevant
-bulkOceanC.rawDat <- rawCdat[rawCdat$Overall.category=="Bulk C storage reservoirs" | (rawCdat$Overall.category=="Fish" & rawCdat$Biomass.or.export=="Biomass"),]
+bulkOceanC.rawDat <- rawCdat[rawCdat$Overall.category=="Bulk C storage reservoirs" | (rawCdat$Overall.category=="Ocean biota" & rawCdat$Biomass.or.export=="Biomass" & rawCdat$Subcategory=="z - All ocean biota (upper limit)"),]
 
 # create target DF for plot data
 
 bulkOceanC.plotDat <- data.frame(matrix(ncol = 4, nrow = 9))
 colnames(bulkOceanC.plotDat) <- c("Reservoir","Storage (Pg C)","Reference","refNum")
-bulkOceanC.bulkCats <- c("Living ocean biota","DOC","DIC","Anthropogenic DIC","Sediment C_org (top 1 m)","Sediment C_org (1-5 cm)",
+bulkOceanC.bulkCats <- c("Ocean biota","DOC","DIC","Anthropogenic DIC","Sediment C_org (top 1 m)","Sediment C_org (1-5 cm)",
                          "Sediment C_org (5-30 cm)","Sediment C_org (30-100 cm)","Sediment C_org (all reactive sediments)")
 bulkOceanC.plotDat$Reservoir <- bulkOceanC.bulkCats
 bulkOceanC.plotDat$Reference <- as.character(bulkOceanC.plotDat$Reference)
 
 # populate plot data DF from raw data
 
-bulkOceanC.plotDat[bulkOceanC.plotDat$Reservoir=="Living ocean biota",c(2:4)] <-
-  c(max(bulkOceanC.rawDat[bulkOceanC.rawDat$Overall.category=="Fish" & bulkOceanC.rawDat$Biomass.or.export=="Biomass",c("Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1.","Current.hi.bound..Pg.C.or.Pg.C.yr.1.")], na.rm = T),
-    paste(bulkOceanC.rawDat[bulkOceanC.rawDat$Overall.category=="Fish" & bulkOceanC.rawDat$Biomass.or.export=="Biomass",c("Reference")], collapse = "; "),
-    paste(bulkOceanC.rawDat[bulkOceanC.rawDat$Overall.category=="Fish" & bulkOceanC.rawDat$Biomass.or.export=="Biomass",c("refNum")], collapse = ", "))
+bulkOceanC.plotDat[bulkOceanC.plotDat$Reservoir=="Ocean biota",c(2:4)] <-
+  c(max(bulkOceanC.rawDat[bulkOceanC.rawDat$Overall.category=="Ocean biota" & bulkOceanC.rawDat$Biomass.or.export=="Biomass",c("Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1.","Current.hi.bound..Pg.C.or.Pg.C.yr.1.")], na.rm = T),
+    paste(bulkOceanC.rawDat[bulkOceanC.rawDat$Overall.category=="Ocean biota" & bulkOceanC.rawDat$Biomass.or.export=="Biomass",c("Reference")], collapse = "; "),
+    paste(bulkOceanC.rawDat[bulkOceanC.rawDat$Overall.category=="Ocean biota" & bulkOceanC.rawDat$Biomass.or.export=="Biomass",c("refNum")], collapse = ", "))
 
 bulkOceanC.plotDat[bulkOceanC.plotDat$Reservoir=="DOC",c(2:4)] <-
   c(bulkOceanC.rawDat[bulkOceanC.rawDat$Overall.category=="Bulk C storage reservoirs" & bulkOceanC.rawDat$Subcategory=="Ocean DOC",c("Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1.")],
