@@ -17,8 +17,14 @@ Fish,Mesopelagic species,Biomass,,Pg C,,,,0.575,0.225,2,,,,"Proud et al., 2019",
 Fish,Mesopelagic species,Biomass,,Pg C,,,,0.3,,,,,,"Anderson et al., 2019",Y,
 Fish,Mesopelagic species,Biomass,,Pg C,,,,0.5,,,,,,"Bar-On et al., 2018",N,
 Ocean biota,z - All ocean biota (upper limit),Biomass,,Pg C,,,,3,,,,,,"Makenzie and Lerman, 2006",N,Mass balance approach
-Ocean biota,z - All ocean biota (upper limit),Biomass,,Pg C,,,,2,,,,,,"Bar-On et al., 2018",N,Totals from different marine categories
+Ocean biota,All marine animals,Biomass,,Pg C,,,,1.907,,,,,,"Bar-On et al., 2018",N,"Sum of marine arthropods, fish, molluscs from Table S23 and 0.007 estimate from text for marine mammals"
+Ocean biota,z - All ocean biota (upper limit),Biomass,,Pg C,,,,6,,,,,,"Bar-On et al., 2018",N,Overall number reported for marine biomass
 Ocean biota,z - All ocean biota (upper limit),Biomass,,Pg C,,,,1.5,1,2,,,,"Emerson and Hedges, 2008",N,1-2 Pg range from Table 11.1
+Ocean biota,Phytoplankton,Biomass,,Pg C,,,,1,,,,,,"Bar-On et al., 2018",N,"Sum of picoplankton, diatoms, phaeocystis from p. 53 of Supplementary Information"
+Ocean biota,Phytoplankton,Biomass,,Pg C,,,,0.314,,,,,,"Stoer and Fennel, 2024",N,"""Open ocean phytoplankton biomass"""
+Ocean biota,Zooplankton,Biomass,,Pg C,,,,1.03,,3.21,,,,"Buitenhuis et al., 2013",N,"Sum of pmicro, meso and macrozoops from Table 2"
+Ocean biota,Zooplankton,Biomass,,Pg C,,,,0.403,,,,,,"Drago et al., 2022",N,
+Ocean biota,Zooplankton,Biomass,,Pg C,,,,1.4,,,,,,"Hernández-León et al., 2020",N,
 Fish,All fish,Export,All known processes,Pg C yr-1,,,,1.5,0.3,2.7,,,,"Saba et al., 2021",N,
 Fish,All fish,Export,Fecal pellet production,Pg C yr-1,0.475,,,0.375,,,,,,"Bianchi et al., 2021",Y,For fish in Bianchi et al.'s 10 g - 1000 kg size fraction. Does not include effect of diel vertical migrations
 Fish,Mesopelagic species,Export,Diel vertical migration,Pg C yr-1,,,,2.25,0.9,3.6,,,,"Boyd et al., 2019",N,
