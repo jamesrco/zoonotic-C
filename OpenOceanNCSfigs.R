@@ -83,9 +83,17 @@ segments(Biomass.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg
 
 # text with our reference #s
 
+# convert numbers to letters and eliminate gaps
+
+# vector of letters of right length for number of refs in this subset
+Biomass_refLetters <- letters[seq(from = 1, to = length(unique(Biomass.today$refNum)))]
+
+# assign right letter to each ref, knowing that there are some refs cited more than once
+Biomass.today$alpha_ref <- Biomass_refLetters[match(Biomass.today$refNum, sort(unique(Biomass.today$refNum)))]
+
 text(Biomass.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.or.Pg.C.yr.1.,
      as.numeric(yrange.Biomass),
-     Biomass.today$refNum, cex = 0.6)
+     Biomass.today$alpha_ref, cex = 0.6)
 
 # plot the flux data
 
