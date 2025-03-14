@@ -95,6 +95,9 @@ text(Biomass.today$Current.quantity.or.height.of.whaling.fishing.minimum..Pg.C.o
      as.numeric(yrange.Biomass),
      Biomass.today$alpha_ref, cex = 0.6)
 
+# data frame of just references with their subscripts for the caption
+reflist <- data.frame(Biomass.today$Reference,Biomass.today$alpha_ref)
+
 # plot the flux data
 
 # subset first
