@@ -1,4 +1,6 @@
 # zoonotic-C
+[![DOI](https://zenodo.org/badge/500670439.svg)](https://doi.org/10.5281/zenodo.15116506)
+
 Calculations and figures to support:
 
 Collins, J. R., R. E. Boenish, M. R. Cape, C. R. Benitez-Nelson, S. C. Doney, R. M. Fujita, S. D. Gaines, R. L. Gruby, D. Jin, H. H. Kim, K. M. Kleisner, G. Mariani, L. A. Moore, A. J. Pershing, D. N. Rader, J. Roman, G. K. Saba, J. N. Sanchirico, S. Saul, M. S. Savoca, and A. Waller (2025). The biogeochemistry of natural climate solutions based on fish, fisheries, and marine mammals: A review of current evidence, research needs, and critical assessment of readiness. In revision for *Global Biogeochemical Cycles*.
