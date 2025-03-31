@@ -1,5 +1,9 @@
 # zoonotic-C
-Calculations and figures to support Collins et al. "zoogeochemical carbon" review for *Global Biogeochemical Cycles*, currently in revision, and a separate analysis of the possible climate impacts from new benthic trawling in the emerging Arctic, with EDF co-authors.
+Calculations and figures to support:
+
+Collins, J. R., R. E. Boenish, M. R. Cape, C. R. Benitez-Nelson, S. C. Doney, R. M. Fujita, S. D. Gaines, R. L. Gruby, D. Jin, H. H. Kim, K. M. Kleisner, G. Mariani, L. A. Moore, A. J. Pershing, D. N. Rader, J. Roman, G. K. Saba, J. N. Sanchirico, S. Saul, M. S. Savoca, and A. Waller (2025). The biogeochemistry of natural climate solutions based on fish, fisheries, and marine mammals: A review of current evidence, research needs, and critical assessment of readiness. In revision for *Global Biogeochemical Cycles*.
+
+A separate analysis of the possible climate impacts from new benthic trawling in the emerging Arctic, with EDF co-authors.
 
 **Note:** Code and data for refinement/constraint of the benthic trawling CO<sub>2</sub> emissions estimate presented in [Sala et al., 2021. Protecting the global ocean for biodiversity, food and climate. *Nature* **592**, 397–402](https://doi.org/10.1038/s41586-021-03371-z), in preprint [on EarthArXiv] (https://doi.org/10.31223/X5XD2P) and in review elsewhere, has been moved to [a new repository](https://github.com/jamesrco/global-trawling-CO2).
 
@@ -37,7 +41,7 @@ Calculations and figures to support Collins et al. "zoogeochemical carbon" revie
 
 #### "Zoogeochemical"" carbon fluxes
 
-* The .csv file [Open_ocean_NCS_C_data.csv](data/Open_ocean_NCS_C_data.csv) contains the input data collected from the literature for the figures in the Collins et al. review for *Global Biogeochemical Cycles*. The references from which the various flux and reservoir estimates were obtained are given in the file. The data in the .csv file, as well as several dozen additional values from the literature, are included in an extensive table in the manuscript. 
+* The .csv file [Open_ocean_NCS_C_data.csv](data/Open_ocean_NCS_C_data.csv) contains the input data collected from the literature for the figures in the Collins et al. review for *Global Biogeochemical Cycles*. The references from which the various flux and reservoir estimates were obtained are given in the file. The data in the .csv file, as well as several dozen additional values from the literature, are included in Table 2 in the manuscript. 
 
 #### Global benthic trawling reanalysis
 
